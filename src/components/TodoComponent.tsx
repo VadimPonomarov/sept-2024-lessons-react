@@ -17,7 +17,7 @@ export const TodoComponent: FC<IProps> = ({ item }) => {
     <Card className={"w-[200px] text-xl font-black"}>
       <CardHeader>
         <CardTitle>{item.id}</CardTitle>
-        <CardDescription>{item.todo}</CardDescription>
+        <CardDescription>{item.title}</CardDescription>
       </CardHeader>
       <CardContent>
         <p className={"text-black-900"}>{item.completed}</p>
