@@ -14,7 +14,7 @@ type IProps = {
 
 export const TodoComponent: FC<IProps> = ({ item }) => {
   return (
-    <Card className={"w-[200px] bg-gradient-to-r from-blue-100 to-green-300"}>
+    <Card className={"w-[200px] bg-gradient-to-r from-gray-100 to-red-300"}>
       <CardHeader>
         <CardTitle>{item.id}</CardTitle>
         <CardDescription>{item.title}</CardDescription>
