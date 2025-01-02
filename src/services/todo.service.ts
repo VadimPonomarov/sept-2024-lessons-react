@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.VITE_API_JPH || "https://dummyjson.com";
+const baseUrl = import.meta.env.VITE_API_URL || "https://dummyjson.com";
 export const todoService = {
   todos: () =>
     fetch(baseUrl + "/" + "todos").then((response) => response.json()),
