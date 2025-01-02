@@ -69,8 +69,17 @@
 
 }
 
-.theme-switch {
-    @apply fixed right-0 top-0 m-2 h-6 w-6 rounded-full p-2;
+.theme-switcher {
+    @apply fixed right-0 top-0 mt-1 mr-7 h-6 w-6 rounded-full p-2;
+}
+.card {
+    @apply max-h-[95vh] flex-col overflow-x-auto p-2 text-justify
+}
+.card-img {
+    @apply h-[160px] w-auto
+}
+.card-content {
+    @apply mt-3 text-sm font-light
 }
 
 
