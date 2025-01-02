@@ -1,4 +1,5 @@
-const baseUrl = import.meta.env.VITE_API_JPH;
+const baseUrl =
+  import.meta.env.VITE_API_JPH || "https://jsonplaceholder.typicode.com";
 export const todoService = {
   todos: () =>
     fetch(baseUrl + "/" + "todos").then((response) => response.json()),
