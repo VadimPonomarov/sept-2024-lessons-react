@@ -12,8 +12,8 @@ export const TodoComponents: FC<IProps> = () => {
   useEffect(() => {
     (async () => {
       try {
-        const result = await getTodos();
-        setTodos(result);
+        const { todos } = await getTodos();
+        setTodos(todos);
       } catch (e) {
         console.log(e);
       }
