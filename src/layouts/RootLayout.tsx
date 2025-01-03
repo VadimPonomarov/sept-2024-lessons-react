@@ -1,12 +1,16 @@
 // @flow
 import { FC } from "react";
 import ThemeToggle from "@/components/ThemeToggle.tsx";
+import { Outlet } from "react-router-dom";
+import { MenuMain } from "@/components/MenuMain.tsx";
 
 type IProps = object;
 const RootLayout: FC<IProps> = () => {
   return (
-    <div className={"mt-[30px] flex p-2"}>
+    <div className={"m-2 flex h-screen w-screen flex-col p-2 align-top"}>
+      <MenuMain />
       <ThemeToggle />
+      <Outlet />
     </div>
   );
 };
