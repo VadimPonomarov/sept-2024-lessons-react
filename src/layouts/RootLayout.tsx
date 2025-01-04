@@ -1,7 +1,7 @@
 // @flow
 import { FC } from "react";
 import ThemeToggle from "@/components/ThemeToggle.tsx";
-import { SimpsonsMain } from "@/components/SimpsonsMain.tsx";
+import SimpsonsMain from "@/components/SimpsonsMain";
 
 type IProps = object;
 const RootLayout: FC<IProps> = () => {
