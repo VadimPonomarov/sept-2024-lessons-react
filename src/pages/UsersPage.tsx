@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { usersService } from "@/services/usersService.ts";
-import { IUser } from "@/services/users.interfaces.ts";
+import { IUser } from "@/models/users.interfaces.ts";
 import { UserCard } from "@/components/UserCard.tsx";
 
 type IProps = object;

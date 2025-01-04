@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IUser } from "@/services/users.interfaces.ts";
+import { IUser } from "@/models/users.interfaces.ts";
 import {
   Card,
   CardContent,

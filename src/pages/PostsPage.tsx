@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { postsService } from "@/services/postsService.ts";
-import { IPost } from "@/services/posts.interfaces.ts";
+import { IPost } from "@/models/posts.interfaces.ts";
 import { PostCard } from "@/components/PostCard.tsx";
 
 type IProps = object;

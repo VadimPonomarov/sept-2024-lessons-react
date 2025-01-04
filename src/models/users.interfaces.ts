@@ -79,3 +79,9 @@ export interface IUser {
   crypto: ICrypto;
   role: string;
 }
+
+export interface IUsersSearch {
+  total: number;
+  skip: number;
+  limit: number;
+}
