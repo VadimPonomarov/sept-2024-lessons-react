@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/drawer";
 import { ShoppingCartIcon } from "lucide-react";
 import { TestDrawerCard } from "@/components/TestDrawerCard.tsx";
+import { useParams } from "react-router-dom";
 
 type IProps = {
   userId: string;
@@ -26,16 +27,18 @@ type IProps = {
 export const TestDrawer: FC<IProps> = ({ userId }) => {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-
+  const { userId: user_id } = useParams();
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">
-            <span className="flex items-center">
-              <ShoppingCartIcon className="h-6 w-6 text-red-500" />
-            </span>
-          </Button>
+          {!user_id && (
+            <Button variant="outline">
+              <span className="flex items-center">
+                <ShoppingCartIcon className="h-6 w-6 text-red-500" />
+              </span>
+            </Button>
+          )}
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -54,11 +57,13 @@ export const TestDrawer: FC<IProps> = ({ userId }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">
-          <span className="flex items-center">
-            <ShoppingCartIcon className="h-6 w-6 text-red-500" />
-          </span>
-        </Button>
+        {!user_id && (
+          <Button variant="outline">
+            <span className="flex items-center">
+              <ShoppingCartIcon className="h-6 w-6 text-red-500" />
+            </span>
+          </Button>
+        )}
       </DrawerTrigger>
       <DrawerContent className="max-w-screen sm:max-w-md">
         <TestDrawerCard userId={userId} />

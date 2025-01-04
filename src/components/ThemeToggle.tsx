@@ -21,7 +21,7 @@ function ThemeToggle() {
     <Button
       variant={"destructive"}
       onClick={toggleTheme}
-      className={"theme-switch"}
+      className={"theme-switch z-50"}
     >
       {theme === "light" ? <MoonIcon /> : <SunIcon />}
     </Button>
