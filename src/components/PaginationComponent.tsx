@@ -48,9 +48,9 @@ export const PaginationComponent: FC<IProps> = memo(({ total }) => {
           )}
           <PaginationItem>
             <PaginationLink href="">
-              {Math.ceil(
+              {Math.floor(
                 Number(params.get("skip")) / Number(params.get("limit")),
-              ) || 1}
+              ) + 1 || 1}
             </PaginationLink>
           </PaginationItem>
           <PaginationItem>
