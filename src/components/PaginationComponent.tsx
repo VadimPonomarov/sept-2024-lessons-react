@@ -1,4 +1,4 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -9,6 +9,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination.tsx";
 import { useSearchParams } from "react-router-dom";
+import SearchParamLimitSelector from "@/components/SearchParamLimitSelector.tsx";
 
 interface IProps {
   total: number;
@@ -31,15 +32,10 @@ export const PaginationComponent: FC<IProps> = memo(({ total }) => {
     setParams({ skip: newSkip, limit: params.get("limit") || "30" });
   };
 
-  useEffect(() => {
-    if (!params.get("skip") || !params.get("limit")) {
-      setParams({ skip: "0", limit: "30" });
-    }
-  }, [params, setParams]);
-
   return (
     <>
       <Pagination>
+        <SearchParamLimitSelector />
         <PaginationContent>
           {Number(params.get("skip")) >= Number(params.get("limit")) && (
             <PaginationItem onClick={setPrev}>
