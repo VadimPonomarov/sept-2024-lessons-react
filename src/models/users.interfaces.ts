@@ -81,7 +81,11 @@ export interface IUser {
 }
 
 export interface IUsersSearch {
-  total: number;
-  skip: number;
-  limit: number;
+  total: string;
+  skip: string;
+  limit: string;
+}
+
+export interface IUsersResponse extends IUsersSearch {
+  users: IUser[];
 }
