@@ -15,7 +15,7 @@ export const UserCart: FC<IProps> = ({ cart }) => {
       className={
         !userId
           ? "max-h-[250px] overflow-auto"
-          : "fixed mb-5 max-h-screen overflow-auto"
+          : "max-w-[47%] fixed mb-5 max-h-screen overflow-auto"
       }
     >
       <div>Total: {cart.total}</div>

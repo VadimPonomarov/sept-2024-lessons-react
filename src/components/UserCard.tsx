@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card.tsx";
 import { TestDrawer } from "@/components/TestDrawer.tsx";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from 'react-responsive';
 
 type IProps = {
   item: IUser;
@@ -17,7 +18,11 @@ type IProps = {
 
 export const UserCard: FC<IProps> = ({ item }) => {
   const navigate = useNavigate();
+  const isXs = useMediaQuery({ maxWidth: 768});
   const handleClick = () => {
+    if (isXs){
+      return
+    }
     navigate("/users/" + item.id);
   };
 
