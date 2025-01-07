@@ -1,4 +1,4 @@
-import { ITodo } from "@/services/interfaces";
+import { ITodo } from "@/services/interfaces.ts";
 import { FC } from "react";
 import {
   Card,
