@@ -1,8 +1,8 @@
 // @flow
 import { FC } from "react";
-import ThemeToggle from "@/components/ThemeToggle.tsx";
+import ThemeToggle from "@/components/ThemeToggle/ThemeToggle.tsx";
 import { Outlet } from "react-router-dom";
-import { MenuMain } from "@/components/MenuMain.tsx";
+import { MenuMain } from "@/components/MenuMain/MenuMain.tsx";
 
 type IProps = object;
 const RootLayout: FC<IProps> = () => {

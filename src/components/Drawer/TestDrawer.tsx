@@ -1,23 +1,11 @@
 import * as React from "react";
 import { FC } from "react";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { useMediaQuery } from "@/hooks/use-media-query.tsx";
+import { Button } from "@/components/ui/button.tsx";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.tsx";
+import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from "@/components/ui/drawer.tsx";
 import { ShoppingCartIcon } from "lucide-react";
-import { TestDrawerCard } from "@/components/TestDrawerCard.tsx";
+import { TestDrawerCard } from "@/components/DrawerCard/TestDrawerCard.tsx";
 import { useParams } from "react-router-dom";
 
 type IProps = {

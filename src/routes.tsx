@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import { UsersPage } from "@/pages/UsersPage.tsx";
-import RootLayout from "@/layouts/RootLayout.tsx";
-import { PostsPage } from "@/pages/PostsPage.tsx";
-import UsersExtraLayout from "@/layouts/UsersExtraLayout.tsx";
-import { UsersCartPage } from "@/pages/UsersCartPage.tsx";
+import { UsersPage } from "@/pages/UsersPage/UsersPage.tsx";
+import RootLayout from "@/layouts/RootLayout/RootLayout.tsx";
+import { PostsPage } from "@/pages/PostsPage/PostsPage.tsx";
+import UsersExtraLayout from "@/layouts/UsersExtraLayout/UsersExtraLayout.tsx";
+import { UsersCartPage } from "@/pages/UsersCartPage/UsersCartPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -14,10 +14,10 @@ export const router = createBrowserRouter([
       {
         path: "users",
         element: <UsersExtraLayout />,
-        children: [{ path: ":userId", element: <UsersCartPage /> }],
+        children: [{ path: ":userId", element: <UsersCartPage /> }]
       },
       { path: "posts", element: <PostsPage /> },
-      { path: "*", element: <UsersPage /> },
-    ],
-  },
+      { path: "*", element: <UsersPage /> }
+    ]
+  }
 ]);
