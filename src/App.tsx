@@ -1,4 +1,4 @@
-import RootLayout from "@/layouts/RootLayout.tsx";
+import RootLayout from "@/layouts/RootLayout/RootLayout.tsx";
 
 function App() {
   return <RootLayout />;

@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { ITodo } from "@/services/interfaces.ts";
 import { todoService } from "@/services/todo.service.ts";
-import { TodoComponent } from "@/components/TodoComponent.tsx";
+import { TodoComponent } from "@/components/TodoComponent/TodoComponent.tsx";
 
 type IProps = object;
 
-export const TodoComponents: FC<IProps> = () => {
+export const TodosComponent: FC<IProps> = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const getTodos = async () => await todoService.todos();
 
