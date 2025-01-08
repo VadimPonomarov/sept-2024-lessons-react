@@ -37,7 +37,7 @@ export const CartProductsDetails: FC<IProps> = ({ products }) => {
           <TableCell className="text-right">{products.price}</TableCell>
           <TableCell className="text-right">{products.quantity}</TableCell>
           <TableCell className="text-right">
-            {products.total.toFixed(2)}
+            {Number(products.total).toFixed(2)}
           </TableCell>
           <TableCell className="text-right">
             {products.discountPercentage}
