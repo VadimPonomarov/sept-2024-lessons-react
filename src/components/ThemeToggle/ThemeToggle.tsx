@@ -19,11 +19,12 @@ function ThemeToggle() {
 
   return (
     <Button
+      data-testid="theme-toggle-button"
       variant={"destructive"}
       onClick={toggleTheme}
       className={"theme-switch z-50"}
     >
-      {theme === "light" ? <MoonIcon /> : <SunIcon />}
+      {theme === "light" ? <MoonIcon data-testid="moon-icon"/> : <SunIcon data-testid="sun-icon"/>}
     </Button>
   );
 }
