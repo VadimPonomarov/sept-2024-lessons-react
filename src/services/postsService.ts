@@ -1,4 +1,5 @@
-const baseUrl = import.meta.env.VITE_API_URL || "https://dummyjson.com";
+import { baseUrl } from "@/constants/constants.common.ts";
+
 export const postsService = {
   posts: () =>
     fetch(baseUrl + "/" + "posts").then((response) => response.json()),

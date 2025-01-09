@@ -1,6 +1,7 @@
 import { IUsersSearch } from "@/models/users.interfaces.ts";
+import { baseUrl } from "@/constants/constants.common.ts";
 
-const baseUrl = import.meta.env.VITE_API_URL || "https://dummyjson.com";
+
 export const usersService = {
   users: async (params: Partial<IUsersSearch>) => {
     const qParams = new URLSearchParams(params);
