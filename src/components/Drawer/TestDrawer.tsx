@@ -1,20 +1,21 @@
-import * as React from "react";
-import { FC } from "react";
-import { useMediaQuery } from "@/hooks/use-media-query.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.tsx";
-import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from "@/components/ui/drawer.tsx";
-import { ShoppingCartIcon } from "lucide-react";
-import { TestDrawerCard } from "@/components/DrawerCard/TestDrawerCard.tsx";
-import { useParams } from "react-router-dom";
+import * as React from 'react';
+import { FC } from 'react';
+import { useMediaQuery } from '@/hooks/use-media-query.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog.tsx';
+import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from '@/components/ui/drawer.tsx';
+import { ShoppingCartIcon } from 'lucide-react';
+import { TestDrawerCard } from '@/components/DrawerCard/TestDrawerCard.tsx';
+import { useParams } from 'react-router-dom';
 
-type IProps = {
+interface IProps {
   userId: string;
-};
+  setOpen?: (open: boolean) => void;
+}
 
 export const TestDrawer: FC<IProps> = ({ userId }) => {
   const [open, setOpen] = React.useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery('(min-width: 768px)');
   const { userId: user_id } = useParams();
   if (isDesktop) {
     return (
@@ -34,6 +35,7 @@ export const TestDrawer: FC<IProps> = ({ userId }) => {
               <span className="flex items-center">
                 <ShoppingCartIcon className="h-6 w-6 text-red-500" />
               </span>
+              Shopping Cart
             </DialogTitle>
           </DialogHeader>
           <TestDrawerCard userId={userId} />
