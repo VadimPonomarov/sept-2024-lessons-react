@@ -12,3 +12,13 @@ export interface IPost {
   views: number;
   userId: number;
 }
+
+export interface IPostsSearch {
+  total: string;
+  skip: string;
+  limit: string;
+}
+
+export interface IPostsResponse extends IPostsSearch {
+  posts: IPost[];
+}

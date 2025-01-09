@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { ICart } from "@/interfaces/carts.interfaces.ts";
-import { usersService } from "@/api/usersService.ts";
+import { apiUsers } from "@/api/apiUsers.ts";
 import { UserCart } from "@/components/UserCart/UserCart.tsx";
 
 type IProps = {
@@ -9,7 +9,7 @@ type IProps = {
 
 export const TestDrawerCard: FC<IProps> = ({ userId }) => {
   const [carts, setCarts] = useState<ICart[]>([]);
-  const getCarts = async () => await usersService.userByIdCarts(userId);
+  const getCarts = async () => await apiUsers.userByIdCarts(userId);
   useEffect(() => {
     (async () => {
       try {
