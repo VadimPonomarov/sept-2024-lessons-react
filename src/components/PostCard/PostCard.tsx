@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card.tsx";
-import { IPost } from "@/models/posts.interfaces.ts";
+import { IPost } from "@/interfaces/posts.interfaces.ts";
 
 type IProps = {
   item: IPost;

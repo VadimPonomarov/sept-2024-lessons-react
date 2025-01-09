@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { CartProductsDetails } from './CartProductsDetails';
-import { IProducts } from '@/models/carts.interfaces';
+import { IProducts } from '@/interfaces/carts.interfaces';
 
 describe('CartProductsDetails', () => {
   const products: IProducts = {

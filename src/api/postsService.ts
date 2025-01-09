@@ -1,4 +1,4 @@
-import { baseUrl } from "@/constants/constants.common.ts";
+import { baseUrl } from "@/api/common.ts";
 
 export const postsService = {
   posts: () =>

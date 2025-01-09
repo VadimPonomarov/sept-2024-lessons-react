@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useState } from "react";
-import { usersService } from "@/services/usersService.ts";
-import { IUsersResponse } from "@/models/users.interfaces.ts";
+import { usersService } from "@/api/usersService.ts";
+import { IUsersResponse } from "@/interfaces/users.interfaces.ts";
 import { UserCard } from "@/components/UserCard/UserCard.tsx";
 import { useSearchParams } from "react-router-dom";
 import { PaginationComponent } from "@/components/PaginationComponent/PaginationComponent.tsx";

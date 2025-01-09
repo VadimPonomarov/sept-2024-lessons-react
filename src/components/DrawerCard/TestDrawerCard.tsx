@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
-import { ICart } from "@/models/carts.interfaces.ts";
-import { usersService } from "@/services/usersService.ts";
+import { ICart } from "@/interfaces/carts.interfaces.ts";
+import { usersService } from "@/api/usersService.ts";
 import { UserCart } from "@/components/UserCart/UserCart.tsx";
 
 type IProps = {

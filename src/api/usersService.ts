@@ -1,5 +1,5 @@
-import { IUsersSearch } from "@/models/users.interfaces.ts";
-import { baseUrl } from "@/constants/constants.common.ts";
+import { IUsersSearch } from "@/interfaces/users.interfaces.ts";
+import { baseUrl } from "@/api/common.ts";
 
 
 export const usersService = {
