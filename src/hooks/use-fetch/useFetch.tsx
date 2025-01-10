@@ -2,15 +2,14 @@ import { FC } from "react";
 import { useEffectOnce } from "@/hooks/useEffectOnce.tsx";
 import { IProps } from "./interfaces.ts";
 
-const UseFetch: FC<IProps> = ({ cb, params = {}, set }) => {
+const UseFetch: FC<IProps> = ({ cb, params, set }) => {
   useEffectOnce(() => {
-    const fetch = async () => {
+    (async () => {
       const response = await cb(params);
       set(response);
-    };
-    fetch();
+    })();
   });
-  return <></>;
+  return null;
 };
 
 export default UseFetch;

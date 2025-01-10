@@ -9,7 +9,7 @@ import useFetch from "@/hooks/use-fetch/useFetch.tsx";
 type IProps = object;
 
 export const UsersPage: FC<IProps> = () => {
-  const [params] = useSearchParams();
+  const [params] = useSearchParams() ;
   const [users, setUsers] = useState<IUsersResponse | undefined>(undefined);
   useFetch({params, set: setUsers, cb: apiUsers.users});
 
