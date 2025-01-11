@@ -9,10 +9,19 @@ import { useSearchParams } from "react-router-dom";
 
 const SearchParamLimitSelector = () => {
   const [params, setParams] = useSearchParams();
+
+  const handleLimitChange = (value: string) => {
+    setParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("limit", value);
+      return newParams;
+    });
+  };
+
   return (
     <Select
       value={params.get("limit") || "30"}
-      onValueChange={(value) => setParams({ limit: value })}
+      onValueChange={handleLimitChange}
     >
       <SelectTrigger className="w-[70px] border-none text-xs focus:border-none">
         <SelectValue placeholder="Limit" />
@@ -28,3 +37,5 @@ const SearchParamLimitSelector = () => {
 };
 
 export default SearchParamLimitSelector;
+
+

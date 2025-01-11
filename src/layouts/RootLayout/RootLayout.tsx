@@ -1,4 +1,3 @@
-// @flow
 import { FC } from "react";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle.tsx";
 import { Outlet } from "react-router-dom";
