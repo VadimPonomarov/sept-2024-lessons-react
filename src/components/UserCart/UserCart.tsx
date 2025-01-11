@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { ICart } from "@/interfaces/carts.interfaces.ts";
 import { CartProductsDetails } from "@/components/CartProductsDetails/CartProductsDetails.tsx";
 import { useParams } from "react-router-dom";
+import { v4 } from "uuid";
 
 type IProps = {
   cart: ICart;
@@ -9,14 +10,13 @@ type IProps = {
 
 export const UserCart: FC<IProps> = ({ cart }) => {
   const { userId } = useParams();
-  useEffect(() => {
-  }, [userId]);
+  useEffect(() => {}, [userId]);
   return (
     <div
       className={
         !userId
           ? "max-h-[250px] overflow-auto"
-          : "max-w-[47%] fixed mb-5 max-h-screen overflow-auto"
+          : "fixed mb-5 max-h-screen max-w-[47%] overflow-auto"
       }
     >
       <div>Total: {cart.total}</div>
@@ -24,7 +24,7 @@ export const UserCart: FC<IProps> = ({ cart }) => {
       <div>Discounted total: {cart.discountedTotal}</div>
       <div>Total quantity: {cart.totalQuantity}</div>
       {cart.products.map((item) => (
-        <CartProductsDetails key={userId} products={item} />
+        <CartProductsDetails key={v4()} products={item} />
       ))}
     </div>
   );

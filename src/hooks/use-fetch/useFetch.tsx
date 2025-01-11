@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useEffectOnce } from "@/hooks/useEffectOnce.tsx";
-import { IProps } from "./interfaces.ts";
+import { IUserProps, IPostProps } from "./interfaces.ts";
 
-const UseFetch: FC<IProps> = ({ cb, params, set }) => {
+const UseFetchUser: FC<IUserProps> = ({ cb, params, set }) => {
   useEffectOnce(() => {
     (async () => {
       const response = await cb(params);
@@ -12,4 +12,15 @@ const UseFetch: FC<IProps> = ({ cb, params, set }) => {
   return null;
 };
 
-export default UseFetch;
+const UseFetchPost: FC<IPostProps> = ({ cb, params, set }) => {
+  useEffectOnce(() => {
+    (async () => {
+      const response = await cb(params);
+      set(response);
+    })();
+  });
+  return null;
+};
+
+export { UseFetchUser, UseFetchPost };
+
