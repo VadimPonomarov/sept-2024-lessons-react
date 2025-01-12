@@ -33,6 +33,14 @@ export const MenuMain: FC<IProps> = () => {
                     <MenubarTrigger>Posts</MenubarTrigger>
                 </NavLink>
             </MenubarMenu>
+          <MenubarMenu>
+                <NavLink
+                    to="/cars"
+                    className={({isActive}) => (isActive ? "active" : "")}
+                >
+                    <MenubarTrigger>Cars</MenubarTrigger>
+                </NavLink>
+            </MenubarMenu>
         </Menubar>
     );
 };

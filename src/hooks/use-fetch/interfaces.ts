@@ -6,24 +6,32 @@ import {
   IPostsResponse as PR,
   IPostsSearch as PS,
 } from "@/interfaces/posts.interfaces.ts";
+import { ICarsResponse as CR } from "@/interfaces/cars.interfaces.ts";
 import React from "react";
 
 type CS = US | PS;
 
 export interface IUserProps {
-  params?: Partial<CS> | {};
   set: React.Dispatch<React.SetStateAction<UR | undefined>>;
   cb: (params?: Partial<CS>) => Promise<UR | undefined>;
 }
 
 export interface IPostProps {
-  params?: Partial<CS> | {};
   set: React.Dispatch<React.SetStateAction<PR | undefined>>;
   cb: (params?: Partial<CS>) => Promise<PR | undefined>;
 }
 
+export interface ICarProps {
+  set: React.Dispatch<React.SetStateAction<CR | undefined>>;
+  cb: () => Promise<CR | undefined>;
+}
+
 export interface IProps<T> {
-  params?: Partial<CS> | {};
   set: React.Dispatch<React.SetStateAction<T>>;
   cb: (params?: Partial<CS>) => Promise<T>;
+}
+
+export interface FetchProps<T> {
+  cb: (params?: Record<string, string>) => Promise<T>;
+  set: (data: T) => void;
 }
