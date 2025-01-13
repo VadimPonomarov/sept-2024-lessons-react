@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import { apiPosts } from "@/api/apiPosts.ts";
-import { IPostsResponse } from "@/interfaces/posts.interfaces.ts";
+import { IPostsResponse } from "@/common/interfaces/posts.interfaces.ts";
 import { PostCard } from "@/components/PostCard/PostCard.tsx";
-import useFetch from "@/hooks/use-fetch/useFetch.tsx";
+import useFetch from "@/common/hooks/use-fetch/useFetch.tsx";
 
 type IProps = object;
 

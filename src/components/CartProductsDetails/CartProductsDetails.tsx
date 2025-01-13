@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IProducts } from "@/interfaces/carts.interfaces.ts";
+import { IProducts } from "@/common/interfaces/carts.interfaces.ts";
 import {
   Table,
   TableBody,

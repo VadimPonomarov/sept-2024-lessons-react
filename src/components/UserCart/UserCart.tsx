@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { ICart } from "@/interfaces/carts.interfaces.ts";
+import { ICart } from "@/common/interfaces/carts.interfaces.ts";
 import { CartProductsDetails } from "@/components/CartProductsDetails/CartProductsDetails.tsx";
 import { useParams } from "react-router-dom";
 import { v4 } from "uuid";

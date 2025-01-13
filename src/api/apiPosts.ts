@@ -1,5 +1,5 @@
-import { baseUrl } from "@/constants/constants.ts";
-import { IPostsResponse } from "@/interfaces/posts.interfaces.ts";
+import { baseUrl } from "@/common/constants/constants.ts";
+import { IPostsResponse } from "@/common/interfaces/posts.interfaces.ts";
 
 export const apiPosts = {
   posts: async (): Promise<IPostsResponse | undefined> => {

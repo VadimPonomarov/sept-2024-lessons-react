@@ -1,5 +1,5 @@
-import { baseUrl } from "@/constants/constants.ts";
-import { IUser, IUsersResponse, IUsersSearch } from "@/interfaces/users.interfaces.ts";
+import { baseUrl } from "@/common/constants/constants.ts";
+import { IUser, IUsersResponse, IUsersSearch } from "@/common/interfaces/users.interfaces.ts";
 
 export const apiUsers = {
   users: async (

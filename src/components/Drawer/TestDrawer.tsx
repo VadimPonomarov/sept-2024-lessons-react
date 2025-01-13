@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FC } from 'react';
-import { useMediaQuery } from '@/hooks/use-media-query.tsx';
+import { useMediaQuery } from '@/common/hooks/use-media-query.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog.tsx';
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from '@/components/ui/drawer.tsx';

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { ICar } from "@/common/interfaces/cars.interfaces.ts";
 import {
   Card,
   CardContent,
@@ -7,26 +8,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card.tsx";
-import { IPost } from "@/common/interfaces/posts.interfaces.ts";
 
-type IProps = {
-  item: IPost;
-};
-
-export const PostCard: FC<IProps> = ({ item }) => {
+type IProps = { item: ICar };
+export const CarCard: FC<IProps> = ({ item }) => {
   return (
     <Card className={"h-[200px] w-[300px] overflow-auto"}>
       <CardHeader>
         <CardTitle>
-          {item.id}: {item.title}
+          {item.brand}
         </CardTitle>
-        <CardDescription>Tags: {item.tags}</CardDescription>
+        <CardDescription>Year: {item.year}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{item.body}</p>
+        <p>Price:{item.price}</p>
       </CardContent>
       <CardFooter>
-        <p className={"text-small"}>Views: {item.views}</p>
+        <p className={"text-small"}>Id: {item.id}</p>
       </CardFooter>
     </Card>
   );

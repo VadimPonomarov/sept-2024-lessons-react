@@ -1,12 +1,12 @@
 import {
   IUsersResponse as UR,
   IUsersSearch as US,
-} from "@/interfaces/users.interfaces.ts";
+} from "@/common/interfaces/users.interfaces.ts";
 import {
   IPostsResponse as PR,
   IPostsSearch as PS,
-} from "@/interfaces/posts.interfaces.ts";
-import { ICarsResponse as CR } from "@/interfaces/cars.interfaces.ts";
+} from "@/common/interfaces/posts.interfaces.ts";
+import { ICarsResponse as CR } from "@/common/interfaces/cars.interfaces.ts";
 import React from "react";
 
 type CS = US | PS;

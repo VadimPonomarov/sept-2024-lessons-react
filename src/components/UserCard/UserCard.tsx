@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IUser } from "@/interfaces/users.interfaces.ts";
+import { IUser } from "@/common/interfaces/users.interfaces.ts";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { TestDrawer } from "@/components/Drawer/TestDrawer.tsx";
 import { useNavigate } from "react-router-dom";

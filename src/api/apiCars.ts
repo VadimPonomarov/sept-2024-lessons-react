@@ -1,10 +1,10 @@
 import axios from "axios";
-import { baseCarsUrl } from "@/constants/constants.ts";
+import { baseCarsUrl } from "@/common/constants/constants.ts";
 import {
   ICar,
   ICarCreate,
   ICarsResponse,
-} from "@/interfaces/cars.interfaces.ts";
+} from "@/common/interfaces/cars.interfaces.ts";
 
 const apiCars = axios.create({
   baseURL: baseCarsUrl,

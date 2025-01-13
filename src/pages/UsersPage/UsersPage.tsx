@@ -1,9 +1,9 @@
 import { FC, memo, useState } from "react";
 import { apiUsers } from "@/api/apiUsers.ts";
-import { IUsersResponse } from "@/interfaces/users.interfaces.ts";
+import { IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
 import { UserCard } from "@/components/UserCard/UserCard.tsx";
 import { PaginationComponent } from "@/components/PaginationComponent/PaginationComponent.tsx";
-import useFetch from "@/hooks/use-fetch/useFetch.tsx";
+import useFetch from "@/common/hooks/use-fetch/useFetch.tsx";
 
 type IProps = object;
 

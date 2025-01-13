@@ -5,6 +5,7 @@ import { PostsPage } from "@/pages/PostsPage/PostsPage.tsx";
 import UsersExtraLayout from "@/layouts/UsersExtraLayout/UsersExtraLayout.tsx";
 import { UsersCartPage } from "@/pages/UsersCartPage/UsersCartPage.tsx";
 import { CarsPage } from "@/pages/CarsPage/CarsPage.tsx";
+import FormComponent from "@/components/CarForm/CarForm.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
       },
       { path: "posts", element: <PostsPage /> },
       { path: "cars", element: <CarsPage /> },
+      { path: "cars/:id", element: <FormComponent /> },
       { path: "*", element: <UsersPage /> }
     ]
   }
