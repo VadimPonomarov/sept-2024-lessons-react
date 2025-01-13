@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { ICar } from "@/common/interfaces/cars.interfaces.ts";
-import { SubmitHandler } from "react-hook-form";
+import {
+  DefaultValues,
+  KeepStateOptions,
+  SubmitHandler,
+} from "react-hook-form";
 
 type IProps = {
-  reset: any;
+  reset: (
+    values?: DefaultValues<ICar> | ICar,
+    keepStateOptions?: KeepStateOptions,
+  ) => void;
 };
 
-export const useCarForm = ({ reset }:IProps) => {
+export const useCarForm = ({ reset }: IProps) => {
   const [formData, setFormData] = useState<ICar | null>(null);
 
   const onCreate = (data: ICar) => {
