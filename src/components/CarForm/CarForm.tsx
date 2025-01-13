@@ -7,10 +7,11 @@ import { ICar } from "@/common/interfaces/cars.interfaces.ts";
 import { schema } from "./schemas.joi.ts";
 import { ResizableWrapper } from "@/components/ResizableWrapper/ResizableWrapper.tsx";
 import css from "./car-form.module.css";
-import { IProps } from "./interfaces.ts";
 import { useCarForm } from "@/components/CarForm/use-car-form.tsx";
+import { useLocation } from "react-router-dom";
 
-const CarForm: FC<IProps> = ({ car }) => {
+const CarForm: FC = () => {
+  const { car } = useLocation().state as { car: ICar };
   const {
     register,
     handleSubmit,
@@ -22,15 +23,13 @@ const CarForm: FC<IProps> = ({ car }) => {
     mode: "all",
   });
 
-  const { formData, onSubmit, handleReset } = useCarForm({
-    reset,
-  });
+  const { onDelete, onSubmit, handleReset } = useCarForm({ reset });
 
   return (
     <div className={css.container}>
       <ResizableWrapper>
         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-          {formData?.id && (
+          {car?.id && (
             <div className={css.formGroup}>
               <label htmlFor="id">ID</label>
               <Input {...register("id")} id="id" type="number" disabled />
@@ -58,10 +57,13 @@ const CarForm: FC<IProps> = ({ car }) => {
           </div>
           <div className={css.buttonGroup}>
             <Button type="submit" disabled={!isValid}>
-              {formData?.id ? "Edit" : "Create"}
+              {car?.id ? "Edit" : "Create"}
             </Button>
             <Button type="button" onClick={handleReset}>
               Reset
+            </Button>
+            <Button type="button" disabled={!car?.id} onClick={onDelete}>
+              Delete
             </Button>
           </div>
         </form>

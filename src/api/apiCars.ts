@@ -23,7 +23,7 @@ export const apiCarsService = {
       console.log(e);
     }
   },
-  carsCreate: async (data: ICarCreate): Promise<ICar | undefined> => {
+  create: async (data: ICarCreate): Promise<ICar | undefined> => {
     try {
       const response = await apiCars.post("/cars", data);
       return response.data;
@@ -31,13 +31,21 @@ export const apiCarsService = {
       console.log(e);
     }
   },
-  carUpdateById: async (
+  updateById: async (
     id: string,
     data: ICarCreate,
   ): Promise<ICar | undefined> => {
     try {
       const response = await apiCars.put("/cars" + "/" + id, data);
       return response.data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  deleteById: async (id: string): Promise<void | undefined> => {
+    try {
+      await apiCars.delete("/cars" + "/" + id);
+      return;
     } catch (e) {
       console.log(e);
     }

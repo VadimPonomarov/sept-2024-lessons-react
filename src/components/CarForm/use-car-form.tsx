@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { ICar } from "@/common/interfaces/cars.interfaces.ts";
+import { ICar, ICarCreate } from "@/common/interfaces/cars.interfaces.ts";
 import {
   DefaultValues,
   KeepStateOptions,
   SubmitHandler,
 } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiCarsService } from "@/api/apiCars.ts";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type IProps = {
   reset: (
@@ -15,16 +18,62 @@ type IProps = {
 
 export const useCarForm = ({ reset }: IProps) => {
   const [formData, setFormData] = useState<ICar | null>(null);
+  const { car } = useLocation().state as { car: ICar };
+  const client = useQueryClient();
+  const navigate = useNavigate();
+
+  const { mutate: create } = useMutation({
+    mutationFn: (data: ICarCreate) => apiCarsService.create(data),
+    onSuccess: (newCar) => {
+      client.setQueryData(["cars"], (oldCars: ICar[]) => {
+        return [...(oldCars as ICar[]), newCar];
+      });
+    },
+  });
+  const { mutate: update } = useMutation({
+    mutationFn: (data: ICar) =>
+      apiCarsService.updateById(data.id.toString(), data),
+    onSuccess: (newCar) => {
+      client.setQueryData(["cars"], (oldCars: ICar[]) => {
+        const oldCarsFiltered = (oldCars as ICar[]).filter(
+          (item) => item.id !== newCar?.id,
+        );
+        return [...(oldCarsFiltered as ICar[]), newCar];
+      });
+    },
+  });
+  const { mutate: del } = useMutation({
+    mutationFn: (id: string) => apiCarsService.deleteById(id),
+    onSuccess: () => {
+      client.setQueryData(["cars"], (oldCars: ICar[]) => {
+        const oldCarsFiltered = (oldCars as ICar[]).filter(
+          (item) => item.id !== car.id,
+        );
+        return [...(oldCarsFiltered as ICar[])];
+      });
+    },
+  });
 
   const onCreate = (data: ICar) => {
     const newData = { ...data, id: Math.floor(Math.random() * 10000) };
     setFormData(newData);
+    create(newData);
     reset(newData);
+    navigate(-1)
   };
 
   const onUpdate = (data: ICar) => {
     setFormData(data);
+    update(data);
     reset(data);
+    navigate(-1)
+  };
+
+  const onDelete = () => {
+    if (car.id) {
+      del(car.id.toString());
+      navigate(-1)
+    }
   };
 
   const onSubmit: SubmitHandler<ICar> = (data) => {
@@ -45,5 +94,13 @@ export const useCarForm = ({ reset }: IProps) => {
     } as unknown as ICar);
   };
 
-  return { formData, onCreate, onUpdate, onSubmit, handleReset };
+  return {
+    formData,
+    setFormData,
+    onCreate,
+    onUpdate,
+    onDelete,
+    onSubmit,
+    handleReset,
+  };
 };
