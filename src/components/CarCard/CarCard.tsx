@@ -26,7 +26,7 @@ export const CarCard: FC<IProps> = ({ item }) => {
         <p className="text-small">Id: {item.id}</p>
       </CardFooter>
       <span className={"absolute right-4 top-2"}>
-        <CrudButtonGroup orientation="horizontal" />
+        <CrudButtonGroup orientation="horizontal" onEdit={()=>{}} onDelete={()=>{}} onCreate={()=>{}} />
       </span>
     </Card>
   );
