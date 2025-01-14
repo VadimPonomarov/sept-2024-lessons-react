@@ -1,33 +1,66 @@
-import js from "@eslint/js";
-import globals from "globals";
+import pluginJs from "@eslint/js";
+import importPlugin from "eslint-plugin-import";
+import prettierPlugin from "eslint-plugin-prettier";
+import pluginReact from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
+import globals from "globals";
 import tseslint from "typescript-eslint";
-import jest from "eslint-plugin-jest";
-import testingLibrary from "eslint-plugin-testing-library";
 
-export default tseslint.config(
-  { ignores: ["dist"] },
+export default [
+  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended, "plugin:react/recommended", "plugin:jest/recommended", "plugin:testing-library/react"],
-    files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        module: true,
+      },
     },
+  },
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  {
     plugins: {
       "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
-      "jest": jest,
-      "testing-library": testingLibrary,
+      import: importPlugin,
+      prettier: prettierPlugin,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
+      "react/display-name": "off",
+      "typescript-eslint/no-require-imports": "off",
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+          ],
+          pathGroups: [
+            {
+              pattern: "**/*.css",
+              group: "index",
+              position: "after",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["builtin"],
+          "newlines-between": "always",
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
+        },
       ],
-      "no-unused-vars": "off",
+      "prettier/prettier": "error",
+      "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-unused-vars": "error",
+      "no-empty": "error",
+      "@typescript-eslint/no-empty-interface": "error",
+      "react-hooks/exhaustive-deps": "warn",
     },
     settings: {
       react: {
@@ -35,5 +68,4 @@ export default tseslint.config(
       },
     },
   },
-);
-
+];

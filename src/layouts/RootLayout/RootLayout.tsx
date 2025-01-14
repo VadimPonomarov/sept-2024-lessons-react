@@ -1,7 +1,8 @@
 import { FC } from "react";
-import ThemeToggle from "@/components/ThemeToggle/ThemeToggle.tsx";
 import { Outlet } from "react-router-dom";
+
 import { MenuMain } from "@/components/MenuMain/MenuMain.tsx";
+import ThemeToggle from "@/components/ThemeToggle/ThemeToggle.tsx";
 
 type IProps = object;
 const RootLayout: FC<IProps> = () => {

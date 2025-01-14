@@ -1,4 +1,7 @@
-import { FC, memo } from "react";
+import { FC } from "react";
+import { useSearchParams } from "react-router-dom";
+
+import SearchParamLimitSelector from "@/components/SearchParamLimitSelector/SearchParamLimitSelector.tsx";
 import {
   Pagination,
   PaginationContent,
@@ -8,14 +11,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination.tsx";
-import { useSearchParams } from "react-router-dom";
-import SearchParamLimitSelector from "@/components/SearchParamLimitSelector/SearchParamLimitSelector.tsx";
 
 interface IProps {
   total: number;
 }
 
-export const PaginationComponent: FC<IProps> = memo(({ total }) => {
+export const PaginationComponent: FC<IProps> = ({ total }) => {
   const [params, setParams] = useSearchParams();
 
   const setNext = () => {
@@ -38,21 +39,21 @@ export const PaginationComponent: FC<IProps> = memo(({ total }) => {
         <SearchParamLimitSelector />
         <PaginationContent>
           {Number(params.get("skip")) >= Number(params.get("limit")) && (
-            <PaginationItem onClick={setPrev} style={{ cursor: 'pointer' }}>
+            <PaginationItem onClick={setPrev} style={{ cursor: "pointer" }}>
               <PaginationPrevious />
             </PaginationItem>
           )}
-          <PaginationItem style={{ cursor: 'pointer' }}>
+          <PaginationItem style={{ cursor: "pointer" }}>
             <PaginationLink>
               {Math.floor(
-                Number(params.get("skip")) / Number(params.get("limit"))
+                Number(params.get("skip")) / Number(params.get("limit")),
               ) + 1 || 1}
             </PaginationLink>
           </PaginationItem>
-          <PaginationItem style={{ cursor: 'pointer' }}>
+          <PaginationItem style={{ cursor: "pointer" }}>
             <PaginationEllipsis />
           </PaginationItem>
-          <PaginationItem onClick={setNext} style={{ cursor: 'pointer' }}>
+          <PaginationItem onClick={setNext} style={{ cursor: "pointer" }}>
             {(total - Number(params.get("skip"))) /
               Number(params.get("limit")) >
               1 && <PaginationNext />}
@@ -61,6 +62,4 @@ export const PaginationComponent: FC<IProps> = memo(({ total }) => {
       </Pagination>
     </>
   );
-});
-
-
+};

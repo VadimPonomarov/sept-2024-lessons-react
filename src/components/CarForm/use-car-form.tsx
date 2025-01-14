@@ -1,13 +1,14 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { ICar, ICarCreate } from "@/common/interfaces/cars.interfaces.ts";
 import {
   DefaultValues,
   KeepStateOptions,
   SubmitHandler,
 } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiCarsService } from "@/api/apiCars.ts";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { apiCarsService } from "@/api/apiCars.ts";
+import { ICar, ICarCreate } from "@/common/interfaces/cars.interfaces.ts";
 
 type IProps = {
   reset: (
@@ -59,20 +60,20 @@ export const useCarForm = ({ reset }: IProps) => {
     setFormData(newData);
     create(newData);
     reset(newData);
-    navigate(-1)
+    navigate(-1);
   };
 
   const onUpdate = (data: ICar) => {
     setFormData(data);
     update(data);
     reset(data);
-    navigate(-1)
+    navigate(-1);
   };
 
   const onDelete = () => {
     if (car.id) {
       del(car.id.toString());
-      navigate(-1)
+      navigate(-1);
     }
   };
 

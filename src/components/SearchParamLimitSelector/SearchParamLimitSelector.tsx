@@ -1,3 +1,5 @@
+import { useSearchParams } from "react-router-dom";
+
 import {
   Select,
   SelectContent,
@@ -5,7 +7,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select.tsx";
-import { useSearchParams } from "react-router-dom";
 
 const SearchParamLimitSelector = () => {
   const [params, setParams] = useSearchParams();
@@ -37,5 +38,3 @@ const SearchParamLimitSelector = () => {
 };
 
 export default SearchParamLimitSelector;
-
-

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 interface FetchProps<T> {
@@ -9,15 +9,15 @@ interface FetchProps<T> {
 const useFetch = <T,>({ cb, set }: FetchProps<T>): void => {
   const [urlSearchParams] = useSearchParams();
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const params = Object.fromEntries(urlSearchParams);
     const response = await cb(params);
     set(response);
-  };
+  }, [cb, set, urlSearchParams]);
 
   useEffect(() => {
     fetchData();
-  }, [urlSearchParams]);
+  }, [urlSearchParams, fetchData]);
 
   return;
 };

@@ -1,9 +1,17 @@
 import { FC } from "react";
-import { IUser } from "@/common/interfaces/users.interfaces.ts";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { TestDrawer } from "@/components/Drawer/TestDrawer.tsx";
-import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
+
+import { IUser } from "@/common/interfaces/users.interfaces.ts";
+import { TestDrawer } from "@/components/Drawer/TestDrawer.tsx";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card.tsx";
 
 type IProps = {
   item: IUser;

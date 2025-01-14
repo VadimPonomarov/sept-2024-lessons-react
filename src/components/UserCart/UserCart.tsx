@@ -1,14 +1,15 @@
-import { FC, useEffect } from "react";
-import { ICart } from "@/common/interfaces/carts.interfaces.ts";
-import { CartProductsDetails } from "@/components/CartProductsDetails/CartProductsDetails.tsx";
+import { FC, memo, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { v4 } from "uuid";
+
+import { ICart } from "@/common/interfaces/carts.interfaces.ts";
+import { CartProductsDetails } from "@/components/CartProductsDetails/CartProductsDetails.tsx";
 
 type IProps = {
   cart: ICart;
 };
 
-export const UserCart: FC<IProps> = ({ cart }) => {
+const UserCart_: FC<IProps> = ({ cart }) => {
   const { userId } = useParams();
   useEffect(() => {}, [userId]);
   return (
@@ -29,3 +30,4 @@ export const UserCart: FC<IProps> = ({ cart }) => {
     </div>
   );
 };
+export const UserCart = memo(UserCart_);

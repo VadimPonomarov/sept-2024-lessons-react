@@ -1,4 +1,6 @@
 import { FC } from "react";
+
+import { IPost } from "@/common/interfaces/posts.interfaces.ts";
 import {
   Card,
   CardContent,
@@ -7,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card.tsx";
-import { IPost } from "@/common/interfaces/posts.interfaces.ts";
 
 type IProps = {
   item: IPost;

@@ -5,8 +5,8 @@ export interface ICar {
   year: number;
 }
 
-export interface ICarCreate extends Omit<ICar, "id"> {}
+export type ICarCreate = Omit<ICar, "id">;
 
-export interface ICarUpdate extends Partial<ICarCreate> {}
+export type ICarUpdate = Partial<ICarCreate>;
 
 export type ICarsResponse = ICar[];

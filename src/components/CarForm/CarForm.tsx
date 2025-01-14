@@ -1,14 +1,16 @@
+import { joiResolver } from "@hookform/resolvers/joi";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { Input } from "@/components/ui/input.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { ICar } from "@/common/interfaces/cars.interfaces.ts";
-import { schema } from "./schemas.joi.ts";
-import { ResizableWrapper } from "@/components/ResizableWrapper/ResizableWrapper.tsx";
-import css from "./car-form.module.css";
-import { useCarForm } from "@/components/CarForm/use-car-form.tsx";
 import { useLocation } from "react-router-dom";
+
+import css from "./car-form.module.css";
+import { schema } from "./schemas.joi.ts";
+
+import { ICar } from "@/common/interfaces/cars.interfaces.ts";
+import { useCarForm } from "@/components/CarForm/use-car-form.tsx";
+import { ResizableWrapper } from "@/components/ResizableWrapper/ResizableWrapper.tsx";
+import { Button } from "@/components/ui/button.tsx";
+import { Input } from "@/components/ui/input.tsx";
 
 const CarForm: FC = () => {
   const { car } = useLocation().state as { car: ICar };

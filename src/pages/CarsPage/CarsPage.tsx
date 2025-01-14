@@ -1,11 +1,12 @@
-import { FC, memo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { CarCard } from "@/components/CarCard/CarCard.tsx";
-import { apiCarsService } from "@/api/apiCars.ts";
-import { Button } from "@/components/ui/button.tsx";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const CarsPage: FC = memo(() => {
+import { apiCarsService } from "@/api/apiCars.ts";
+import { CarCard } from "@/components/CarCard/CarCard.tsx";
+import { Button } from "@/components/ui/button.tsx";
+
+export const CarsPage: FC = () => {
   const { data, isSuccess, isFetching } = useQuery({
     queryKey: ["cars"],
     queryFn: apiCarsService.cars,
@@ -29,8 +30,10 @@ export const CarsPage: FC = memo(() => {
       >
         {isSuccess &&
           data &&
-          data.sort((a, b) => a.id - b.id).map((item) => <CarCard key={item.id} item={item} />)}
+          data
+            .sort((a, b) => a.id - b.id)
+            .map((item) => <CarCard key={item.id} item={item} />)}
       </div>
     </div>
   );
-});
+};

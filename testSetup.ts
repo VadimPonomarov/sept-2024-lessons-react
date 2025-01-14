@@ -1,15 +1,15 @@
-import '@testing-library/jest-dom';
-import { TextEncoder, TextDecoder } from 'util';
+import "@testing-library/jest-dom";
+import { TextEncoder, TextDecoder } from "util";
 
-Object.defineProperty(global, 'TextEncoder', {
+Object.defineProperty(global, "TextEncoder", {
   value: TextEncoder,
 });
 
-Object.defineProperty(global, 'TextDecoder', {
+Object.defineProperty(global, "TextDecoder", {
   value: TextDecoder,
 });
 
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string) => ({
     matches: false,
@@ -22,6 +22,3 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: jest.fn(),
   }),
 });
-
-
-

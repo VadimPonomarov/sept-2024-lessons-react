@@ -1,13 +1,14 @@
-import {
-  IUsersResponse as UR,
-  IUsersSearch as US,
-} from "@/common/interfaces/users.interfaces.ts";
+import React from "react";
+
+import { ICarsResponse as CR } from "@/common/interfaces/cars.interfaces.ts";
 import {
   IPostsResponse as PR,
   IPostsSearch as PS,
 } from "@/common/interfaces/posts.interfaces.ts";
-import { ICarsResponse as CR } from "@/common/interfaces/cars.interfaces.ts";
-import React from "react";
+import {
+  IUsersResponse as UR,
+  IUsersSearch as US,
+} from "@/common/interfaces/users.interfaces.ts";
 
 type CS = US | PS;
 

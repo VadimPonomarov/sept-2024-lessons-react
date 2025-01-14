@@ -1,5 +1,10 @@
 import { baseUrl } from "@/common/constants/constants.ts";
-import { IUser, IUsersResponse, IUsersSearch } from "@/common/interfaces/users.interfaces.ts";
+import {
+  IUser,
+  IUserCartResponse,
+  IUsersResponse,
+  IUsersSearch,
+} from "@/common/interfaces/users.interfaces.ts";
 
 export const apiUsers = {
   users: async (
@@ -18,14 +23,17 @@ export const apiUsers = {
       const response = await fetch(`${baseUrl}/users/${userId}`);
       return await response.json();
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   },
-  userByIdCarts: async (userId: string): Promise<any> => {
+  userByIdCarts: async (
+    userId: string,
+  ): Promise<IUserCartResponse | undefined> => {
     try {
       const response = await fetch(`${baseUrl}/users/${userId}/carts`);
       return await response.json();
     } catch (e) {
+      console.log(e);
     }
   },
 };

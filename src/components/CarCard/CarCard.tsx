@@ -1,5 +1,8 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { ICar } from "@/common/interfaces/cars.interfaces.ts";
+import CrudButtonGroup from "@/components/CrudButtonGroup/CrudButtonGroup.tsx";
 import {
   Card,
   CardContent,
@@ -8,8 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card.tsx";
-import CrudButtonGroup from "@/components/CrudButtonGroup/CrudButtonGroup.tsx";
-import { useNavigate } from "react-router-dom";
 
 type IProps = { item: ICar };
 
@@ -31,10 +32,7 @@ export const CarCard: FC<IProps> = ({ item }) => {
         <p className="text-small">Id: {item.id}</p>
       </CardFooter>
       <span className={"absolute right-4 top-2"}>
-        <CrudButtonGroup
-          orientation="horizontal"
-          onEdit={onEditHandler}
-        />
+        <CrudButtonGroup orientation="horizontal" onEdit={onEditHandler} />
       </span>
     </Card>
   );
