@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
+
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import { apiCarsService } from "@/api/apiCars.ts";

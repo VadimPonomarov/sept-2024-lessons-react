@@ -1,5 +1,6 @@
-import { MenubarTrigger } from "@radix-ui/react-menubar";
 import { FC } from "react";
+
+import { MenubarTrigger } from "@radix-ui/react-menubar";
 import { NavLink } from "react-router-dom";
 
 import { Menubar, MenubarMenu } from "@/components/ui/menubar.tsx";

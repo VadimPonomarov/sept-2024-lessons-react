@@ -37,16 +37,28 @@ export default [
             "internal",
             "parent",
             "sibling",
+            "object",
+            "type",
             "index",
           ],
           pathGroups: [
             {
-              pattern: "**/*.css",
+              pattern: "react",
+              group: "external",
+              position: "before",
+            },
+            {
+              pattern: "**/*.{js,jsx,ts,tsx}",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "**/*.{css,scss}",
               group: "index",
               position: "after",
             },
           ],
-          pathGroupsExcludedImportTypes: ["builtin"],
+          pathGroupsExcludedImportTypes: ["react"],
           "newlines-between": "always",
           alphabetize: {
             order: "asc",

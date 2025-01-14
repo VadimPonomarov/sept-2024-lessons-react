@@ -1,6 +1,7 @@
+import { FC } from "react";
+
 import { PencilSquareIcon } from "@heroicons/react/16/solid";
 import { PlusCircleIcon, Trash2Icon } from "lucide-react";
-import { FC } from "react";
 
 import { Button } from "@/components/ui/button.tsx";
 

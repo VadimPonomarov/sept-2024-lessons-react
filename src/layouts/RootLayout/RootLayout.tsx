@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import { Outlet } from "react-router-dom";
 
 import { MenuMain } from "@/components/MenuMain/MenuMain.tsx";
