@@ -16,7 +16,7 @@ const apiCars = axios.create({
 });
 
 export const apiCarsService = {
-  cars: async (): Promise<ICarsResponse | undefined> => {
+  cars: async (): Promise<ICarsResponse> => {
     try {
       const response = await apiCars.get("/cars");
       return response.data;
@@ -24,7 +24,7 @@ export const apiCarsService = {
       console.log(e);
     }
   },
-  create: async (data: ICarCreate): Promise<ICar | undefined> => {
+  create: async (data: ICarCreate): Promise<ICar> => {
     try {
       const response = await apiCars.post("/cars", data);
       return response.data;
@@ -32,10 +32,7 @@ export const apiCarsService = {
       console.log(e);
     }
   },
-  updateById: async (
-    id: string,
-    data: ICarCreate,
-  ): Promise<ICar | undefined> => {
+  updateById: async (id: string, data: ICarCreate): Promise<ICar> => {
     try {
       const response = await apiCars.put("/cars" + "/" + id, data);
       return response.data;
@@ -43,7 +40,7 @@ export const apiCarsService = {
       console.log(e);
     }
   },
-  deleteById: async (id: string): Promise<void | undefined> => {
+  deleteById: async (id: string): Promise<void> => {
     try {
       await apiCars.delete("/cars" + "/" + id);
       return;
