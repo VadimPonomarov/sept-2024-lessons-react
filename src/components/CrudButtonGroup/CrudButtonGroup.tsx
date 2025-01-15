@@ -20,33 +20,21 @@ export const CrudButtonGroup: FC<IProps> = ({
 }) => {
   return (
     <div
-      className={`flex ${orientation === "vertical" ? "flex-col" : "flex-row"} justify-center gap-2`}
+      className={`flex ${orientation === "vertical" ? "flex-col" : "flex-row"} justify-center gap-2 align-middle`}
     >
       {onCreate && (
-        <Button
-          variant="outline"
-          onClick={onCreate}
-          className="border-none bg-transparent p-0 shadow-none"
-        >
-          <PlusCircleIcon className="h-6 w-6" />
+        <Button variant="ghost" className={"p-0"} onClick={onCreate}>
+          <PlusCircleIcon />
         </Button>
       )}
       {onEdit && (
-        <Button
-          variant="outline"
-          onClick={onEdit}
-          className="border-none bg-transparent p-0 shadow-none"
-        >
-          <PencilSquareIcon className="h-6 w-6" />
+        <Button variant="ghost" className={"p-0"} onClick={onEdit}>
+          <PencilSquareIcon />
         </Button>
       )}
       {onDelete && (
-        <Button
-          variant="outline"
-          onClick={onDelete}
-          className="border-none bg-transparent p-0 shadow-none"
-        >
-          <Trash2Icon className="h-6 w-6" />
+        <Button variant="ghost" className={"p-0"} onClick={onDelete}>
+          <Trash2Icon />
         </Button>
       )}
     </div>

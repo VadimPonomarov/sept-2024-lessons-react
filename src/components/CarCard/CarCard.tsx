@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { ICar } from "@/common/interfaces/cars.interfaces.ts";
 import CrudButtonGroup from "@/components/CrudButtonGroup/CrudButtonGroup.tsx";
@@ -16,9 +16,9 @@ import {
 type IProps = { item: ICar };
 
 export const CarCard: FC<IProps> = ({ item }) => {
-  const navigate = useNavigate();
+  const linkRef = useRef(null);
   const onEditHandler = () => {
-    navigate(`/cars/${item.id}`, { state: { car: item } });
+    linkRef.current.click();
   };
   return (
     <Card className="relative h-[200px] w-[300px] overflow-auto">
@@ -32,7 +32,13 @@ export const CarCard: FC<IProps> = ({ item }) => {
       <CardFooter>
         <p className="text-small">Id: {item.id}</p>
       </CardFooter>
-      <span className={"absolute right-4 top-2"}>
+      <span className={"hidden, absolute right-4 top-2"}>
+        <Link
+          to={`/cars/${item.id}`}
+          state={{ car: item }}
+          ref={linkRef}
+          onClick={onEditHandler}
+        />
         <CrudButtonGroup orientation="horizontal" onEdit={onEditHandler} />
       </span>
     </Card>

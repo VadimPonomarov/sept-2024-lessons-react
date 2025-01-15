@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { apiCarsService } from "@/api/apiCars.ts";
 import { CarCard } from "@/components/CarCard/CarCard.tsx";
@@ -14,15 +14,11 @@ export const CarsPage: FC = () => {
     staleTime: 10000,
   });
 
-  const navigate = useNavigate();
   return (
     <div className={"relative mt-[40px] flex flex-wrap justify-evenly gap-2"}>
-      <Button
-        variant={"outline"}
-        onClick={() => navigate("/cars/create", { state: { car: {} } })}
-      >
-        +
-      </Button>
+      <Link to={"/cars/create"} state={{ car: {} }}>
+        <Button variant={"outline"}>+</Button>
+      </Link>
       {isFetching && <div>Fetching ...</div>}
       <div
         className={
@@ -30,7 +26,6 @@ export const CarsPage: FC = () => {
         }
       >
         {isSuccess &&
-          data &&
           data
             .sort((a, b) => a.id - b.id)
             .map((item) => <CarCard key={item.id} item={item} />)}

@@ -7,9 +7,7 @@ import {
 } from "@/common/interfaces/users.interfaces.ts";
 
 export const apiUsers = {
-  users: async (
-    params?: Partial<IUsersSearch | undefined>,
-  ): Promise<IUsersResponse | undefined> => {
+  users: async (params?: Partial<IUsersSearch>): Promise<IUsersResponse> => {
     try {
       const qParams = new URLSearchParams(params as Record<string, string>);
       const response = await fetch(`${baseUrl}/users?${qParams.toString()}`);
@@ -18,7 +16,7 @@ export const apiUsers = {
       console.error(e);
     }
   },
-  userById: async (userId: string): Promise<IUser | undefined> => {
+  userById: async (userId: string): Promise<IUser> => {
     try {
       const response = await fetch(`${baseUrl}/users/${userId}`);
       return await response.json();
@@ -26,9 +24,7 @@ export const apiUsers = {
       console.log(e);
     }
   },
-  userByIdCarts: async (
-    userId: string,
-  ): Promise<IUserCartResponse | undefined> => {
+  userByIdCarts: async (userId: string): Promise<IUserCartResponse> => {
     try {
       const response = await fetch(`${baseUrl}/users/${userId}/carts`);
       return await response.json();
