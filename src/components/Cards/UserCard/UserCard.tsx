@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 
 import { IUser } from "@/common/interfaces/users.interfaces.ts";
-import { TestDrawer } from "@/components/Drawer/TestDrawer.tsx";
+import { TestDrawer } from "@/components/All/Drawer/TestDrawer.tsx";
 import {
   Card,
   CardContent,

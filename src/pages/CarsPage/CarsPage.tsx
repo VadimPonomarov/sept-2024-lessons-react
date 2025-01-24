@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 import { apiCarsService } from "@/api/apiCars.ts";
-import { CarCard } from "@/components/CarCard/CarCard.tsx";
+import { CarCard } from "@/components/Cards/CarCard/CarCard.tsx";
 import { Button } from "@/components/ui/button.tsx";
 
 export const CarsPage: FC = () => {

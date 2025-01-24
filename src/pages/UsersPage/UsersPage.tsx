@@ -3,8 +3,8 @@ import { FC, memo, useState } from "react";
 import { apiUsers } from "@/api/apiUsers.ts";
 import useFetch from "@/common/hooks/use-fetch/useFetch.tsx";
 import { IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
-import { PaginationComponent } from "@/components/PaginationComponent/PaginationComponent.tsx";
-import { UserCard } from "@/components/UserCard/UserCard.tsx";
+import { PaginationComponent } from "@/components/All/PaginationComponent/PaginationComponent.tsx";
+import { UserCard } from "@/components/Cards/UserCard/UserCard.tsx";
 
 type IProps = object;
 export const UsersPage: FC<IProps> = memo(() => {

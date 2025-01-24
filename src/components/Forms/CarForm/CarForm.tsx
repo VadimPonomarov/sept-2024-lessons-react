@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
 import { ICar } from "@/common/interfaces/cars.interfaces.ts";
-import { useCarForm } from "@/components/CarForm/use-car-form.tsx";
-import { ResizableWrapper } from "@/components/ResizableWrapper/ResizableWrapper.tsx";
+import { ResizableWrapper } from "@/components/All/ResizableWrapper/ResizableWrapper.tsx";
+import { useCarForm } from "@/components/Forms/CarForm/use-car-form.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 

@@ -3,7 +3,7 @@ import { FC, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { ICar } from "@/common/interfaces/cars.interfaces.ts";
-import CrudButtonGroup from "@/components/CrudButtonGroup/CrudButtonGroup.tsx";
+import CrudButtonGroup from "@/components/All/CrudButtonGroup/CrudButtonGroup.tsx";
 import {
   Card,
   CardContent,

@@ -2,8 +2,8 @@ import { FC } from "react";
 
 import { Outlet } from "react-router-dom";
 
-import { MenuMain } from "@/components/MenuMain/MenuMain.tsx";
-import ThemeToggle from "@/components/ThemeToggle/ThemeToggle.tsx";
+import ThemeToggle from "@/components/All/ThemeToggle/ThemeToggle.tsx";
+import { MenuMain } from "@/components/Menus/MenuMain/MenuMain.tsx";
 
 type IProps = object;
 const RootLayout: FC<IProps> = () => {

@@ -1,6 +1,6 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
 
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "./ThemeToggle.tsx";
 
 describe("ThemeToggle", () => {
   it('initial theme is set to "light"', () => {

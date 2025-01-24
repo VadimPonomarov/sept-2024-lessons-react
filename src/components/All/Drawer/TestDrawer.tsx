@@ -5,7 +5,7 @@ import { ShoppingCartIcon } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 import { useMediaQuery } from "@/common/hooks/use-media-query.tsx";
-import { TestDrawerCard } from "@/components/DrawerCard/TestDrawerCard.tsx";
+import { TestDrawerCard } from "@/components/Cards/DrawerCard/TestDrawerCard.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Dialog,

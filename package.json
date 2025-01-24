@@ -7,9 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint ."
   },
   "dependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-dialog": "^1.1.4",
@@ -24,8 +28,8 @@
     "dotenv": "^16.4.7",
     "joi": "^17.13.3",
     "lucide-react": "^0.469.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^7.1.1",
@@ -34,6 +38,8 @@
     "util": "^0.12.5",
     "uuid": "^11.0.5",
     "vaul": "^1.1.2",
+    "vite-plugin-babel": "^1.3.0",
+    "vite-plugin-dynamic-import": "^1.6.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -61,6 +67,7 @@
     "eslint-plugin-jest": "^28.10.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-compiler": "^19.0.0-beta-e552027-20250112",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "eslint-plugin-testing-library": "^7.1.1",

@@ -2,6 +2,7 @@ import pluginJs from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import prettierPlugin from "eslint-plugin-prettier";
 import pluginReact from "eslint-plugin-react";
+import reactCompiler from "eslint-plugin-react-compiler";
 import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 import tseslint from "typescript-eslint";
@@ -24,6 +25,7 @@ export default [
       "react-hooks": reactHooks,
       import: importPlugin,
       prettier: prettierPlugin,
+      "react-compiler": reactCompiler,
     },
     rules: {
       "react/display-name": "off",

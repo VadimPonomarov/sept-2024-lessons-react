@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { v4 } from "uuid";
 
 import { ICart } from "@/common/interfaces/carts.interfaces.ts";
-import { CartProductsDetails } from "@/components/CartProductsDetails/CartProductsDetails.tsx";
+import { CartProductsDetails } from "@/components/Carts/CartProductsDetails/CartProductsDetails.tsx";
 
 type IProps = {
   cart: ICart;

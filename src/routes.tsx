@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import FormComponent from "@/components/CarForm/CarForm.tsx";
+import FormComponent from "@/components/Forms/CarForm/CarForm.tsx";
 import RootLayout from "@/layouts/RootLayout/RootLayout.tsx";
 import UsersExtraLayout from "@/layouts/UsersExtraLayout/UsersExtraLayout.tsx";
 import { CarsPage } from "@/pages/CarsPage/CarsPage.tsx";

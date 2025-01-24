@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select.tsx";
+} from "../../ui/select.tsx";
 
 const SearchParamLimitSelector = () => {
   const [params, setParams] = useSearchParams();

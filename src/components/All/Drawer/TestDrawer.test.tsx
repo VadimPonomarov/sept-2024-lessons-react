@@ -1,9 +1,9 @@
 import { jest } from "@jest/globals";
 import { render } from "@testing-library/react";
 
-import { TestDrawer } from "./TestDrawer";
+import { TestDrawer } from "./TestDrawer.tsx";
 
-import "../../../testSetup";
+import "../../../../testSetup.ts";
 
 jest.mock("../../helpers/getEnvironments", () => ({
   getEnvironments: () => ({

@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 
-import { CartProductsDetails } from "./CartProductsDetails";
+import { IProducts } from "@/common/interfaces/carts.interfaces.ts";
 
-import { IProducts } from "@/common/interfaces/carts.interfaces";
+import { CartProductsDetails } from "./CartProductsDetails.tsx";
 
 describe("CartProductsDetails", () => {
   const products: IProducts = {

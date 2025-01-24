@@ -1,6 +1,6 @@
 import React, { FC, useRef } from "react";
 
-import css from "@/components/CarForm/car-form.module.css";
+import css from "@/components/Forms/CarForm/car-form.module.css";
 
 export const ResizableWrapper: FC<{ children: React.ReactNode }> = ({
   children,
