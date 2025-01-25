@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useState } from "react";
 
-import { apiUsers } from "@/api/apiUsers.ts";
+import { apiUsers } from "@/api/api-users.ts";
 import { ICart } from "@/common/interfaces/carts.interfaces.ts";
 import { IUserCartResponse } from "@/common/interfaces/users.interfaces.ts";
 import { UserCart } from "@/components/Carts/UserCart/UserCart.tsx";

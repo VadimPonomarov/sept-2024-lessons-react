@@ -1,14 +1,14 @@
-import { FC } from "react";
-
 import { useQuery } from "@tanstack/react-query";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { apiCarsService } from "@/api/apiCars.ts";
+import useApiCars from "@/api/use-api-cars.tsx";
 import { CarCard } from "@/components/Cards/CarCard/CarCard.tsx";
 import { Button } from "@/components/ui/button.tsx";
 
 export const CarsPage: FC = () => {
-  const { data, isSuccess, isFetching } = useQuery({
+  const { apiCarsService } = useApiCars();
+  const { data, isFetching } = useQuery({
     queryKey: ["cars"],
     queryFn: apiCarsService.cars,
     staleTime: 10000,
@@ -25,7 +25,7 @@ export const CarsPage: FC = () => {
           "absolute top-[60px] flex w-full flex-wrap justify-evenly gap-2"
         }
       >
-        {isSuccess &&
+        {data &&
           data
             .sort((a, b) => a.id - b.id)
             .map((item) => <CarCard key={item.id} item={item} />)}

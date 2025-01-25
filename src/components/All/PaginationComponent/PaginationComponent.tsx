@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import { useSearchParams } from "react-router-dom";
 
 import SearchParamLimitSelector from "@/components/All/SearchParamLimitSelector/SearchParamLimitSelector.tsx";

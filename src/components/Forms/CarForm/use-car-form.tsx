@@ -1,6 +1,5 @@
-import { useState } from "react";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import {
   DefaultValues,
   KeepStateOptions,
@@ -8,7 +7,7 @@ import {
 } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { apiCarsService } from "@/api/apiCars.ts";
+import useApiCars from "@/api/use-api-cars.tsx";
 import { ICar, ICarCreate } from "@/common/interfaces/cars.interfaces.ts";
 
 type IProps = {
@@ -23,6 +22,7 @@ export const useCarForm = ({ reset }: IProps) => {
   const { car } = useLocation().state as { car: ICar };
   const client = useQueryClient();
   const navigate = useNavigate();
+  const { apiCarsService } = useApiCars();
 
   const { mutate: create } = useMutation({
     mutationFn: (data: ICarCreate) => apiCarsService.create(data),

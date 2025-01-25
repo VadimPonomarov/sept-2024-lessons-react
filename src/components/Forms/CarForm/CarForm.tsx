@@ -1,6 +1,5 @@
-import { FC } from "react";
-
 import { joiResolver } from "@hookform/resolvers/joi";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 

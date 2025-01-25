@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { apiPosts } from "@/api/apiPosts.ts";
+import useApiPosts from "@/api/use-api-posts.tsx";
 import useFetch from "@/common/hooks/use-fetch/useFetch.tsx";
 import { IPostsResponse } from "@/common/interfaces/posts.interfaces.ts";
 import { PostCard } from "@/components/Cards/PostCard/PostCard.tsx";
@@ -8,6 +8,7 @@ import { PostCard } from "@/components/Cards/PostCard/PostCard.tsx";
 type IProps = object;
 
 export const PostsPage: FC<IProps> = () => {
+  const { apiPostsService: apiPosts } = useApiPosts();
   const [posts, setPosts] = useState<IPostsResponse | undefined>(undefined);
   useFetch({ set: setPosts, cb: apiPosts.posts });
 
