@@ -1,5 +1,4 @@
-import { useCallback, useEffect } from "react";
-
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 interface FetchProps<T> {
@@ -10,15 +9,16 @@ interface FetchProps<T> {
 const useFetch = <T,>({ cb, set }: FetchProps<T>): void => {
   const [urlSearchParams] = useSearchParams();
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     const params = Object.fromEntries(urlSearchParams);
     const response = await cb(params);
     set(response);
-  }, [cb, set, urlSearchParams]);
+  };
 
   useEffect(() => {
     fetchData();
-  }, [urlSearchParams, fetchData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlSearchParams]);
 
   return;
 };

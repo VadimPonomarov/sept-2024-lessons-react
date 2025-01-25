@@ -1,7 +1,6 @@
+import { ShoppingCartIcon } from "lucide-react";
 import * as React from "react";
 import { FC } from "react";
-
-import { ShoppingCartIcon } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 import { useMediaQuery } from "@/common/hooks/use-media-query.tsx";

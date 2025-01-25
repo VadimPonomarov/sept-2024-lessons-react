@@ -1,35 +1,29 @@
-import pluginJs from "@eslint/js";
+import tseslint from "@typescript-eslint/eslint-plugin";
 import importPlugin from "eslint-plugin-import";
-import prettierPlugin from "eslint-plugin-prettier";
-import pluginReact from "eslint-plugin-react";
-import reactCompiler from "eslint-plugin-react-compiler";
+import eslintPluginPrettier from "eslint-plugin-prettier";
 import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
-import tseslint from "typescript-eslint";
+import { parser } from "typescript-eslint";
 
 export default [
-  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
   {
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     languageOptions: {
+      parser: parser,
       globals: {
         ...globals.browser,
         module: true,
       },
     },
-  },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  {
     plugins: {
       "react-hooks": reactHooks,
       import: importPlugin,
-      prettier: prettierPlugin,
-      "react-compiler": reactCompiler,
+      prettier: eslintPluginPrettier,
+      "@typescript-eslint": tseslint,
     },
     rules: {
       "react/display-name": "off",
-      "typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-require-imports": "off",
       "import/order": [
         "error",
         {
@@ -47,20 +41,16 @@ export default [
             {
               pattern: "react",
               group: "external",
-              position: "before",
             },
             {
               pattern: "**/*.{js,jsx,ts,tsx}",
               group: "internal",
-              position: "before",
             },
             {
-              pattern: "**/*.{css,scss}",
+              pattern: "**/*.{css}",
               group: "index",
-              position: "after",
             },
           ],
-          pathGroupsExcludedImportTypes: ["react"],
           "newlines-between": "always",
           alphabetize: {
             order: "asc",

@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-
 import { MoonIcon, SunIcon } from "@heroicons/react/16/solid";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button.tsx";
 

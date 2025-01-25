@@ -1,5 +1,4 @@
 import { FC, useRef } from "react";
-
 import { Link } from "react-router-dom";
 
 import { ICar } from "@/common/interfaces/cars.interfaces.ts";

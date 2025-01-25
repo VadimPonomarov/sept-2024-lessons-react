@@ -127,7 +127,7 @@ typings/
 .env
 .env.test
 .env*.local
-src/types/env.d.ts
+src/common/types/env.d.ts
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

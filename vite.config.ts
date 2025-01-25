@@ -10,6 +10,9 @@ import dynamicImport from "vite-plugin-dynamic-import";
 dotenv.config();
 
 export default defineConfig({
+  esbuild: {
+    target: "esnext",
+  },
   plugins: [
     react(),
     babel({

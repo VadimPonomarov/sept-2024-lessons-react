@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import { Outlet } from "react-router-dom";
 
 import ThemeToggle from "@/components/All/ThemeToggle/ThemeToggle.tsx";
