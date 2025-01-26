@@ -10,7 +10,16 @@ const LoginForm = () => {
   const { register, handleSubmit, errors, isValid, handleReset, onSubmit } =
     useLoginForm();
 
-  const formFields = {
+  type FormField = {
+    label: string;
+    type: string;
+  };
+
+  type FormFields = {
+    [key in keyof IDummyAuth]: FormField;
+  };
+
+  const formFields: FormFields = {
     username: { label: "Username", type: "text" },
     password: { label: "Password", type: "password" },
     expiresInMins: { label: "Expires In Minutes", type: "number" },
