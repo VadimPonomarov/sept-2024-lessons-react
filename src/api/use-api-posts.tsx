@@ -9,7 +9,7 @@ const useApiPosts = () => {
   const apiPostsService = {
     posts: async (): Promise<IPostsResponse> => {
       try {
-        const response = await apiPosts.get(baseUrl + "/" + "posts");
+        const response = await apiPosts.get(baseUrl + "/auth/" + "posts");
         return await response.data;
       } catch (e) {
         console.log(e);

@@ -43,7 +43,6 @@ const useAuthInterseptors = (apiInstance: AxiosInstance) => {
             );
 
             dispatch(iniActions.setTokenPair(response.data));
-
             originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
             return apiInstance(originalRequest);
           } catch (refreshError) {

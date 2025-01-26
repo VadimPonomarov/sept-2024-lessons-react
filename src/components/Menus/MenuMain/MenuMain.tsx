@@ -2,11 +2,14 @@ import { MenubarTrigger } from "@radix-ui/react-menubar";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
+import { Badge } from "@/components/ui/badge.tsx";
 import { Menubar, MenubarMenu } from "@/components/ui/menubar.tsx";
+import { useAppSelector } from "@/store/hooks/hooks.ts";
 
 type IProps = object;
 
 export const MenuMain: FC<IProps> = () => {
+  const { authMe } = useAppSelector((state) => state.ini);
   return (
     <Menubar className="fixed z-40 mb-2 flex w-full justify-center gap-4 border-2 bg-primary p-2 text-primary-foreground">
       <MenubarMenu>
@@ -28,9 +31,12 @@ export const MenuMain: FC<IProps> = () => {
       <MenubarMenu>
         <NavLink
           to="/posts"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          className={({ isActive }) =>
+            (isActive ? "active" : "") + (!authMe ? " disabled" : "")
+          }
+          onClick={(e) => !authMe && e.preventDefault()}
         >
-          <MenubarTrigger>Posts</MenubarTrigger>
+          <MenubarTrigger disabled={!authMe}>Posts</MenubarTrigger>
         </NavLink>
       </MenubarMenu>
       <MenubarMenu>
@@ -49,6 +55,11 @@ export const MenuMain: FC<IProps> = () => {
           <MenubarTrigger>Auth</MenubarTrigger>
         </NavLink>
       </MenubarMenu>
+      {authMe && (
+        <Badge variant="destructive" className={"absolute right-20"}>
+          {authMe.firstName}
+        </Badge>
+      )}
     </Menubar>
   );
 };

@@ -1,12 +1,14 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
 import useApiAuth from "@/api/use-api-auth.tsx";
 import { useEffectOnce } from "@/common/hooks/useEffectOnce.tsx";
 import { IDummyAuth } from "@/common/interfaces/dummy.interfaces.ts";
+import { useAppDispatch } from "@/store/hooks/hooks.ts";
+import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 const schema = Joi.object<IDummyAuth>({
   username: Joi.string().required().messages({
@@ -30,27 +32,13 @@ export const useLoginForm = () => {
   const { apiAuthService } = useApiAuth();
   const location = useLocation();
   const user = location.state?.user as IDummyAuth;
+  const dispatch = useAppDispatch();
   const initialValues: IDummyAuth = {
     username: user?.username || "",
     password: user?.password || "",
     expiresInMins: user?.expiresInMins || 30,
   };
   const [formData, setFormData] = useState<IDummyAuth>(initialValues);
-
-  useEffectOnce(() => {
-    if (user) {
-      setFormData(initialValues);
-    }
-  });
-
-  const onSubmit: SubmitHandler<IDummyAuth> = (data) => {
-    apiAuthService.login(data);
-  };
-
-  const handleReset = () => {
-    setFormData(initialValues);
-    reset(initialValues);
-  };
 
   const {
     register,
@@ -62,6 +50,28 @@ export const useLoginForm = () => {
     defaultValues: formData,
     mode: "all",
   });
+
+  useEffectOnce(() => {
+    if (user) {
+      setFormData(initialValues);
+      reset(initialValues);
+    }
+  });
+
+  useEffect(() => {
+    reset(formData);
+  }, [formData, reset]);
+
+  const onSubmit: SubmitHandler<IDummyAuth> = (data) => {
+    apiAuthService.login(data);
+  };
+
+  const handleReset = () => {
+    setFormData({ username: "", password: "", expiresInMins: 30 });
+    reset({ username: "", password: "", expiresInMins: 30 });
+    dispatch(iniActions.unsetMe());
+    dispatch(iniActions.unsetTokenPair());
+  };
 
   return {
     register,
