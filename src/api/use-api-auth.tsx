@@ -52,7 +52,7 @@ const useApiAuth = () => {
             baseUrl + "/auth/me",
             {
               headers: {
-                credenentials: true,
+                credentials: true,
                 Authorization: `Bearer ${accessToken}`,
               },
             },
