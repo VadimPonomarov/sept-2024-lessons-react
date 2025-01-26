@@ -29,8 +29,19 @@ export const UserCard: FC<IProps> = ({ item }) => {
 
   return (
     <div className={"relative"}>
-      <span className={"absolute right-1 top-1"}>
+      <span
+        className={
+          "absolute w-[20%] h-[98%] flex flex-col  justify-between right-1.5 top-1 "
+        }
+      >
         <TestDrawer userId={"" + item.id} />
+        <button
+          className="bt m-2"
+          type="button"
+          onClick={() => navigate("/auth", { state: { user: item } })}
+        >
+          Auth
+        </button>
       </span>
       <Card
         className={"h-[200px] w-[300px] overflow-auto"}

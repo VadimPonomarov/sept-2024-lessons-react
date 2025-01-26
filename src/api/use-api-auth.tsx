@@ -3,31 +3,38 @@ import useAuthInterseptors from "@/api/use-auth-interseptors.tsx";
 import { baseUrl } from "@/common/constants/constants.ts";
 import {
   IDummyAuth,
+  IDummyAuthLoginResponse,
   IDummyAuthMeResponse,
   IDummyAuthRefreshBody,
   IDummyAuthRefreshResponse,
 } from "@/common/interfaces/dummy.interfaces.ts";
-import { useAppDispatch } from "@/store/hooks/hooks.ts";
-import { iniActions, iniSelectors } from "@/store/slises/Ini/iniSlice.ts";
+import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks.ts";
+import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
-const useApiPosts = () => {
+const useApiAuth = () => {
+  const { refreshToken } = useAppSelector((state) => state.ini);
   const dispatch = useAppDispatch();
   const [apiPosts] = useAuthInterseptors(getAxiosService(baseUrl));
 
-  const apiPostsService = {
+  const apiAuthService = {
     login: async (credentials: IDummyAuth): Promise<void> => {
       try {
-        const response = await apiPosts.post(baseUrl + "/auth", credentials);
+        const response = await apiPosts.post<IDummyAuthLoginResponse>(
+          baseUrl + "/auth/login",
+          credentials,
+        );
         dispatch(iniActions.setTokenPair(response.data));
       } catch (e) {
         console.log(e);
       }
     },
-    refresh: async (): Promise<IDummyAuthRefreshResponse> => {
+    refresh: async (
+      expiresInMins: number = 30,
+    ): Promise<IDummyAuthRefreshResponse> => {
       try {
         const body: IDummyAuthRefreshBody = {
-          refreshToken: iniSelectors.refreshToken.toString(),
-          expiresInMins: 30,
+          refreshToken,
+          expiresInMins,
         };
         const response = await apiPosts.post(baseUrl + "/auth/refresh", body);
         return await response.data;
@@ -45,6 +52,6 @@ const useApiPosts = () => {
     },
   };
 
-  return { apiPostsService };
+  return { apiAuthService };
 };
-export default useApiPosts;
+export default useApiAuth;

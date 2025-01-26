@@ -41,6 +41,14 @@ export const MenuMain: FC<IProps> = () => {
           <MenubarTrigger>Cars</MenubarTrigger>
         </NavLink>
       </MenubarMenu>
+      <MenubarMenu>
+        <NavLink
+          to="/auth"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          <MenubarTrigger>Auth</MenubarTrigger>
+        </NavLink>
+      </MenubarMenu>
     </Menubar>
   );
 };

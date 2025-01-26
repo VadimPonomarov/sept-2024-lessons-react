@@ -9,7 +9,7 @@ import { useCarForm } from "@/components/Forms/CarForm/use-car-form.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 
-import css from "./car-form.module.css";
+import css from "./form.module.css";
 import { schema } from "./schemas.joi.ts";
 
 const CarForm: FC = () => {
