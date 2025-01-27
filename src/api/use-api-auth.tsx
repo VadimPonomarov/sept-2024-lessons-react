@@ -3,6 +3,7 @@ import { useEffect, useMemo } from "react";
 import { getAxiosService } from "@/api/get-axios-service.ts";
 import useAuthInterseptors from "@/api/use-auth-interseptors.tsx";
 import { baseUrl } from "@/common/constants/constants.ts";
+import { useAppDispatch, useAppSelector } from "@/common/hooks/store/hooks.ts";
 import {
   IDummyAuth,
   IDummyAuthLoginResponse,
@@ -10,11 +11,10 @@ import {
   IDummyAuthRefreshBody,
   IDummyAuthRefreshResponse,
 } from "@/common/interfaces/dummy.interfaces.ts";
-import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks.ts";
 import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 const useApiAuth = () => {
-  const { accessToken, refreshToken } = useAppSelector((state) => state.ini);
+  const { accessToken, refreshToken } = useAppSelector(state => state.ini);
   const dispatch = useAppDispatch();
   const [apiPosts] = useAuthInterseptors(getAxiosService(baseUrl));
 

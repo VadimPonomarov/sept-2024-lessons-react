@@ -5,9 +5,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
 import useApiAuth from "@/api/use-api-auth.tsx";
+import { useAppDispatch } from "@/common/hooks/store/hooks.ts";
 import { useEffectOnce } from "@/common/hooks/useEffectOnce.tsx";
 import { IDummyAuth } from "@/common/interfaces/dummy.interfaces.ts";
-import { useAppDispatch } from "@/store/hooks/hooks.ts";
 import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 const schema = Joi.object<IDummyAuth>({
@@ -62,7 +62,7 @@ export const useLoginForm = () => {
     reset(formData);
   }, [formData, reset]);
 
-  const onSubmit: SubmitHandler<IDummyAuth> = (data) => {
+  const onSubmit: SubmitHandler<IDummyAuth> = data => {
     apiAuthService.login(data);
   };
 

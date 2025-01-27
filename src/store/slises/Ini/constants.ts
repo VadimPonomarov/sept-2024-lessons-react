@@ -1,4 +1,4 @@
-import { IniState } from "@/store/slises/Ini/interfaces.ts";
+import { IniState } from "@/common/interfaces/store.iini.nterfaces/interfaces.ts";
 
 export const initialState: IniState = {
   accessToken: undefined,

@@ -1,23 +1,23 @@
 import { AxiosInstance } from "axios";
 
 import { baseUrl } from "@/common/constants/constants.ts";
-import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks.ts";
+import { useAppDispatch, useAppSelector } from "@/common/hooks/store/hooks.ts";
 import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 const useAuthInterseptors = (apiInstance: AxiosInstance) => {
-  const { accessToken, refreshToken } = useAppSelector((state) => state.ini);
+  const { accessToken, refreshToken } = useAppSelector(state => state.ini);
   const dispatch = useAppDispatch();
 
   if (accessToken) {
     apiInstance.interceptors.request.use(
-      (config) => {
+      config => {
         if (accessToken) {
           config.headers.Authorization = `Bearer ${accessToken}`;
           config.headers.credenentials = true;
         }
         return config;
       },
-      (error) => {
+      error => {
         return Promise.reject(error);
       },
     );
@@ -25,8 +25,8 @@ const useAuthInterseptors = (apiInstance: AxiosInstance) => {
 
   if (refreshToken) {
     apiInstance.interceptors.response.use(
-      (response) => response,
-      async (error) => {
+      response => response,
+      async error => {
         const originalRequest = error.config;
 
         if (error.response.status === 403 && !originalRequest._retry) {
@@ -37,10 +37,7 @@ const useAuthInterseptors = (apiInstance: AxiosInstance) => {
               refreshToken,
               expiresInMins: 30,
             };
-            const response = await apiInstance.post(
-              baseUrl + "/auth/refresh",
-              body,
-            );
+            const response = await apiInstance.post(baseUrl + "/auth/refresh", body);
 
             dispatch(iniActions.setTokenPair(response.data));
             originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;

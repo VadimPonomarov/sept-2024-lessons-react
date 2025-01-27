@@ -1,9 +1,12 @@
 {
   "trailingComma": "all",
-  "printWidth": 80,
+  "printWidth": 88,
   "semi": true,
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "endOfLine": "lf"
 }
 
 
