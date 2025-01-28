@@ -70,7 +70,8 @@ const useApiAuth = () => {
     if (accessToken) {
       apiAuthService.me();
     }
-  }, [accessToken, apiAuthService]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken]);
 
   return { apiAuthService };
 };

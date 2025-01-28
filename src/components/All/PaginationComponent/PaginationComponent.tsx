@@ -45,18 +45,17 @@ export const PaginationComponent: FC<IProps> = ({ total }) => {
           )}
           <PaginationItem style={{ cursor: "pointer" }}>
             <PaginationLink>
-              {Math.floor(
-                Number(params.get("skip")) / Number(params.get("limit")),
-              ) + 1 || 1}
+              {Math.floor(Number(params.get("skip")) / Number(params.get("limit"))) +
+                1 || 1}
             </PaginationLink>
           </PaginationItem>
           <PaginationItem style={{ cursor: "pointer" }}>
             <PaginationEllipsis />
           </PaginationItem>
           <PaginationItem onClick={setNext} style={{ cursor: "pointer" }}>
-            {(total - Number(params.get("skip"))) /
-              Number(params.get("limit")) >
-              1 && <PaginationNext />}
+            {(total - Number(params.get("skip"))) / Number(params.get("limit")) > 1 && (
+              <PaginationNext />
+            )}
           </PaginationItem>
         </PaginationContent>
       </Pagination>

@@ -17,13 +17,8 @@ export const UsersPage: FC<IProps> = memo(() => {
       <div className={"fixed z-40 w-full"}>
         {users && <PaginationComponent total={Number(users.total)} />}
       </div>
-      <div
-        className={
-          "absolute top-[60px] flex w-full flex-wrap justify-evenly gap-2"
-        }
-      >
-        {users &&
-          users.users.map((item) => <UserCard key={item.id} item={item} />)}
+      <div className={"absolute top-[60px] flex w-full flex-wrap justify-evenly gap-2"}>
+        {users && users.users.map(item => <UserCard key={item.id} item={item} />)}
       </div>
     </div>
   );

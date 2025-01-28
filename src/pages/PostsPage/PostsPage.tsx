@@ -14,8 +14,7 @@ export const PostsPage: FC<IProps> = () => {
 
   return (
     <div className={"mt-[40px] flex flex-wrap justify-evenly gap-2"}>
-      {posts &&
-        posts.posts.map((item) => <PostCard key={item.id} item={item} />)}
+      {posts && posts.posts.map(item => <PostCard key={item.id} item={item} />)}
     </div>
   );
 };

@@ -24,7 +24,7 @@ const UserCart_: FC<IProps> = ({ cart }) => {
       <div>Total products: {cart.totalProducts}</div>
       <div>Discounted total: {cart.discountedTotal}</div>
       <div>Total quantity: {cart.totalQuantity}</div>
-      {cart.products.map((item) => (
+      {cart.products.map(item => (
         <CartProductsDetails key={v4()} products={item} />
       ))}
     </div>

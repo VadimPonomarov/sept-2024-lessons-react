@@ -41,16 +41,12 @@ const CarForm: FC = () => {
           <div className={css.formGroup}>
             <label htmlFor="brand">Brand</label>
             <Input {...register("brand")} id="brand" />
-            {errors.brand && (
-              <p className={css.error}>{errors.brand.message}</p>
-            )}
+            {errors.brand && <p className={css.error}>{errors.brand.message}</p>}
           </div>
           <div className={css.formGroup}>
             <label htmlFor="price">Price</label>
             <Input {...register("price")} id="price" type="number" />
-            {errors.price && (
-              <p className={css.error}>{errors.price.message}</p>
-            )}
+            {errors.price && <p className={css.error}>{errors.price.message}</p>}
           </div>
           <div className={css.formGroup}>
             <label htmlFor="year">Year</label>

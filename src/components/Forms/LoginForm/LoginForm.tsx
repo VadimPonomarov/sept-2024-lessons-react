@@ -33,15 +33,9 @@ const LoginForm = () => {
           {Object.entries(formFields).map(([key, { label, type }]) => (
             <div key={key} className={css.formGroup}>
               <label htmlFor={key}>{label}</label>
-              <Input
-                {...register(key as keyof IDummyAuth)}
-                id={key}
-                type={type}
-              />
+              <Input {...register(key as keyof IDummyAuth)} id={key} type={type} />
               {errors[key as keyof IDummyAuth] && (
-                <p className={css.error}>
-                  {errors[key as keyof IDummyAuth]?.message}
-                </p>
+                <p className={css.error}>{errors[key as keyof IDummyAuth]?.message}</p>
               )}
             </div>
           ))}
