@@ -8,7 +8,6 @@ export const MenuMain = () => {
     { path: "/", label: "Home" },
     { path: "/users", label: "Users" },
     { path: "/posts", label: "Posts", requiresAuth: true, disabled: !authMe },
-    { path: "/cars", label: "Cars" },
     { path: "/auth", label: "Auth" },
   ];
 

@@ -6,7 +6,6 @@ import { defineConfig } from "vite";
 import babel from "vite-plugin-babel";
 import dynamicImport from "vite-plugin-dynamic-import";
 
-// Загрузка переменных окружения из файла .env
 dotenv.config();
 
 export default defineConfig({
@@ -25,8 +24,13 @@ export default defineConfig({
       generateScopedName: "[name]__[local]___[hash:base64:5]",
     },
   },
+  optimizeDeps: {
+    include: ["react", "react-dom"],
+  },
   build: {
-    rollupOptions: { output: { manualChunks: { "react-dom": ["react-dom"] } } },
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
   },
   resolve: {
     alias: {
