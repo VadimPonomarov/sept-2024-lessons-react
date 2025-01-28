@@ -10,7 +10,7 @@ type IProps = object;
 export const UsersPage: FC<IProps> = memo(() => {
   const [users, setUsers] = useState<IUsersResponse | undefined>(undefined);
 
-  useFetch({ set: setUsers, cb: apiUsers.users });
+  useFetch({ set: setUsers, cb: apiUsers.users, queryKey: "users" });
 
   return (
     <div className={"relative mt-[40px] flex flex-wrap justify-evenly gap-2"}>

@@ -10,7 +10,7 @@ type IProps = object;
 export const PostsPage: FC<IProps> = () => {
   const { apiPostsService: apiPosts } = useApiPosts();
   const [posts, setPosts] = useState<IPostsResponse | undefined>(undefined);
-  useFetch({ set: setPosts, cb: apiPosts.posts });
+  useFetch({ set: setPosts, cb: apiPosts.posts, queryKey: "posts" });
 
   return (
     <div className={"mt-[40px] flex flex-wrap justify-evenly gap-2"}>
