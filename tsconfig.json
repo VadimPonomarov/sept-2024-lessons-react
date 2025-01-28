@@ -14,7 +14,7 @@
   "compilerOptions": {
     "strict": true,
     "baseUrl": ".",
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "esModuleInterop": true,
     "paths": {
       "@/*": [
