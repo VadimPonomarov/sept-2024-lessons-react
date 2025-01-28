@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 import { getAxiosService } from "@/api/get-axios-service.ts";
 import useAuthInterseptors from "@/api/use-auth-interseptors.tsx";
@@ -18,59 +18,57 @@ const useApiAuth = () => {
   const dispatch = useAppDispatch();
   const [apiPosts] = useAuthInterseptors(getAxiosService(baseUrl));
 
-  const apiAuthService = useMemo(
-    () => ({
-      login: async (credentials: IDummyAuth): Promise<void> => {
-        try {
-          const response = await apiPosts.post<IDummyAuthLoginResponse>(
-            baseUrl + "/auth/login",
-            credentials,
-          );
-          dispatch(iniActions.setTokenPair(response.data));
-        } catch (e) {
-          console.log(e);
-        }
-      },
-      refresh: async (expiresInMins: number = 30): Promise<void> => {
-        try {
-          const body: IDummyAuthRefreshBody = {
-            refreshToken,
-            expiresInMins,
-          };
-          const response = await apiPosts.post<IDummyAuthRefreshResponse>(
-            baseUrl + "/auth/refresh",
-            body,
-          );
-          dispatch(iniActions.setTokenPair(response.data));
-        } catch (e) {
-          console.log(e);
-        }
-      },
-      me: async (): Promise<void> => {
-        try {
-          const response = await apiPosts.get<IDummyAuthMeResponse>(
-            baseUrl + "/auth/me",
-            {
-              headers: {
-                credentials: true,
-                Authorization: `Bearer ${accessToken}`,
-              },
+  const apiAuthService = {
+    login: async (credentials: IDummyAuth): Promise<void> => {
+      try {
+        const response = await apiPosts.post<IDummyAuthLoginResponse>(
+          baseUrl + "/auth/login",
+          credentials,
+        );
+        dispatch(iniActions.setTokenPair(response.data));
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    refresh: async (expiresInMins: number = 30): Promise<void> => {
+      try {
+        const body: IDummyAuthRefreshBody = {
+          refreshToken,
+          expiresInMins,
+        };
+        const response = await apiPosts.post<IDummyAuthRefreshResponse>(
+          baseUrl + "/auth/refresh",
+          body,
+        );
+        dispatch(iniActions.setTokenPair(response.data));
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    me: async (): Promise<void> => {
+      try {
+        const response = await apiPosts.get<IDummyAuthMeResponse>(
+          baseUrl + "/auth/me",
+          {
+            headers: {
+              credentials: true,
+              Authorization: `Bearer ${accessToken}`,
             },
-          );
-          dispatch(iniActions.setMe(response.data));
-        } catch (e) {
-          console.log(e);
-        }
-      },
-    }),
-    [apiPosts, dispatch, accessToken, refreshToken],
-  );
+          },
+        );
+        dispatch(iniActions.setMe(response.data));
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  };
 
   useEffect(() => {
     if (accessToken) {
       apiAuthService.me();
     }
-  }, [accessToken, apiAuthService]);
+    // eslint-disable-next-line
+  }, [accessToken]);
 
   return { apiAuthService };
 };

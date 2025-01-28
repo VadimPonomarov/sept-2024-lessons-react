@@ -13,7 +13,7 @@ jest.mock("../../helpers/getEnvironments", () => ({
 
 describe("TestDrawer", () => {
   it("renders a Dialog when isDesktop is true", () => {
-    jest.spyOn(window, "matchMedia").mockImplementation((query) => ({
+    jest.spyOn(window, "matchMedia").mockImplementation(query => ({
       media: query,
       matches: true,
       onchange: null,

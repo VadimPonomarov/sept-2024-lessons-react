@@ -12,7 +12,7 @@ const SearchParamLimitSelector = () => {
   const [params, setParams] = useSearchParams();
 
   const handleLimitChange = (value: string) => {
-    setParams((prev) => {
+    setParams(prev => {
       const newParams = new URLSearchParams(prev);
       newParams.set("limit", value);
       return newParams;
@@ -20,10 +20,7 @@ const SearchParamLimitSelector = () => {
   };
 
   return (
-    <Select
-      value={params.get("limit") || "30"}
-      onValueChange={handleLimitChange}
-    >
+    <Select value={params.get("limit") || "30"} onValueChange={handleLimitChange}>
       <SelectTrigger className="w-[70px] border-none text-xs focus:border-none">
         <SelectValue placeholder="Limit" />
       </SelectTrigger>

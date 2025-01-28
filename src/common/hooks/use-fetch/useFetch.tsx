@@ -1,26 +1,26 @@
+import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 interface FetchProps<T> {
-  cb: (params?: Record<string, string>) => Promise<T>;
+  cb: (params: Record<string, string>) => Promise<T>;
   set: (data: T) => void;
 }
 
-const useFetch = <T,>({ cb, set }: FetchProps<T>): void => {
+export const useFetch = <T,>({ cb, set }: FetchProps<T>): void => {
   const [urlSearchParams] = useSearchParams();
-
-  const fetchData = async () => {
-    const params = Object.fromEntries(urlSearchParams);
-    const response = await cb(params);
-    set(response);
-  };
+  const location = useLocation();
+  const { data } = useQuery({
+    queryKey: [location.pathname, location.search],
+    queryFn: async () => await cb(Object.fromEntries(urlSearchParams)),
+    staleTime: Infinity,
+  });
 
   useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [urlSearchParams]);
+    if (data) {
+      set(data);
+    }
+  }, [data, set]);
 
   return;
 };
-
-export default useFetch;

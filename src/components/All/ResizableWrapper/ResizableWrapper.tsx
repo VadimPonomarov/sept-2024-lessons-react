@@ -2,9 +2,7 @@ import React, { FC, useRef } from "react";
 
 import css from "@/components/Forms/CarForm/form.module.css";
 
-export const ResizableWrapper: FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const ResizableWrapper: FC<{ children: React.ReactNode }> = ({ children }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleMouseDown = (e: React.MouseEvent) => {

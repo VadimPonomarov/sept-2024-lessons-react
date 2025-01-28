@@ -1,10 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import {
-  DefaultValues,
-  KeepStateOptions,
-  SubmitHandler,
-} from "react-hook-form";
+import { DefaultValues, KeepStateOptions, SubmitHandler } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import useApiCars from "@/api/use-api-cars.tsx";
@@ -26,19 +22,18 @@ export const useCarForm = ({ reset }: IProps) => {
 
   const { mutate: create } = useMutation({
     mutationFn: (data: ICarCreate) => apiCarsService.create(data),
-    onSuccess: (newCar) => {
+    onSuccess: newCar => {
       client.setQueryData(["cars"], (oldCars: ICar[]) => {
         return [...(oldCars as ICar[]), newCar];
       });
     },
   });
   const { mutate: update } = useMutation({
-    mutationFn: (data: ICar) =>
-      apiCarsService.updateById(data.id.toString(), data),
-    onSuccess: (newCar) => {
+    mutationFn: (data: ICar) => apiCarsService.updateById(data.id.toString(), data),
+    onSuccess: newCar => {
       client.setQueryData(["cars"], (oldCars: ICar[]) => {
         const oldCarsFiltered = (oldCars as ICar[]).filter(
-          (item) => item.id !== newCar?.id,
+          item => item.id !== newCar?.id,
         );
         return [...(oldCarsFiltered as ICar[]), newCar];
       });
@@ -48,9 +43,7 @@ export const useCarForm = ({ reset }: IProps) => {
     mutationFn: (id: string) => apiCarsService.deleteById(id),
     onSuccess: () => {
       client.setQueryData(["cars"], (oldCars: ICar[]) => {
-        const oldCarsFiltered = (oldCars as ICar[]).filter(
-          (item) => item.id !== car.id,
-        );
+        const oldCarsFiltered = (oldCars as ICar[]).filter(item => item.id !== car.id);
         return [...(oldCarsFiltered as ICar[])];
       });
     },
@@ -78,7 +71,7 @@ export const useCarForm = ({ reset }: IProps) => {
     }
   };
 
-  const onSubmit: SubmitHandler<ICar> = (data) => {
+  const onSubmit: SubmitHandler<ICar> = data => {
     if (data.id) {
       onUpdate(data);
     } else {

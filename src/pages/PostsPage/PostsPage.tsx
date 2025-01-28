@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
 import useApiPosts from "@/api/use-api-posts.tsx";
-import useFetch from "@/common/hooks/use-fetch/useFetch.tsx";
+import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
 import { IPostsResponse } from "@/common/interfaces/posts.interfaces.ts";
 import { PostCard } from "@/components/Cards/PostCard/PostCard.tsx";
 
@@ -14,8 +14,7 @@ export const PostsPage: FC<IProps> = () => {
 
   return (
     <div className={"mt-[40px] flex flex-wrap justify-evenly gap-2"}>
-      {posts &&
-        posts.posts.map((item) => <PostCard key={item.id} item={item} />)}
+      {posts && posts.posts.map(item => <PostCard key={item.id} item={item} />)}
     </div>
   );
 };

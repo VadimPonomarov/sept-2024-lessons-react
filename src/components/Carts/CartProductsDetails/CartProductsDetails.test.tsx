@@ -35,9 +35,7 @@ describe("CartProductsDetails", () => {
     expect(getByText(products.price.toString())).toBeInTheDocument();
     expect(getByText(products.quantity.toString())).toBeInTheDocument();
     expect(getByText(products.total.toFixed(2))).toBeInTheDocument();
-    expect(
-      getByText(products.discountPercentage.toString()),
-    ).toBeInTheDocument();
+    expect(getByText(products.discountPercentage.toString())).toBeInTheDocument();
     expect(getByText(products.discountedTotal.toFixed(2))).toBeInTheDocument();
   });
 

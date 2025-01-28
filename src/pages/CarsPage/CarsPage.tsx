@@ -20,15 +20,11 @@ export const CarsPage: FC = () => {
         <Button variant={"outline"}>+</Button>
       </Link>
       {isFetching && <div>Fetching ...</div>}
-      <div
-        className={
-          "absolute top-[60px] flex w-full flex-wrap justify-evenly gap-2"
-        }
-      >
+      <div className={"absolute top-[60px] flex w-full flex-wrap justify-evenly gap-2"}>
         {data &&
           data
             .sort((a, b) => a.id - b.id)
-            .map((item) => <CarCard key={item.id} item={item} />)}
+            .map(item => <CarCard key={item.id} item={item} />)}
       </div>
     </div>
   );

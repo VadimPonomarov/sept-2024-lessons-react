@@ -43,10 +43,7 @@ export const UserCard: FC<IProps> = ({ item }) => {
           Auth
         </button>
       </span>
-      <Card
-        className={"h-[200px] w-[300px] overflow-auto"}
-        onClick={handleClick}
-      >
+      <Card className={"h-[200px] w-[300px] overflow-auto"} onClick={handleClick}>
         <CardHeader>
           <CardTitle>
             {item.id}: {item.firstName} {item.lastName}
