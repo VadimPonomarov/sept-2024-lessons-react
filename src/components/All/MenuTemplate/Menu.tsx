@@ -6,24 +6,26 @@ import {useAppSelector} from "@/common/hooks/store/hooks.ts";
 import {IMenuItem, IProps} from "@/components/All/MenuTemplate/menu.interfaces.ts";
 import {Menubar, MenubarMenu} from "@/components/ui/menubar.tsx";
 
-const Menu: FC<IProps> = ({children, items}) => {
+import {clsx} from "clsx";
+
+const Menu: FC<IProps> = ({children, items, className}) => {
     const {authMe} = useAppSelector(state => state.ini);
 
     const isDisabled = (item: IMenuItem) => {
-        if (typeof item.disabled === "boolean") {
-            return item.disabled;
+        if (!authMe && item.requiresAuth) {
+            return item.disabled ?? true;
         }
-        return item.requiresAuth && !authMe;
+        return false;
     };
 
     return (
-        <Menubar className="menu">
+        <Menubar className={clsx("menu", className)}>
             {items.map(item => (
                 <MenubarMenu key={item.path}>
                     <NavLink
                         to={item.path}
                         className={({isActive}) =>
-                            (isActive ? "active" : "") + (isDisabled(item) ? " disabled" : "")
+                            clsx(isActive && "active", isDisabled(item) && "disabled")
                         }
                         onClick={e => isDisabled(item) && e.preventDefault()}
                     >
@@ -37,3 +39,4 @@ const Menu: FC<IProps> = ({children, items}) => {
 };
 
 export default Menu;
+

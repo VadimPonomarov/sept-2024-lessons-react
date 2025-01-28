@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -27,7 +28,7 @@
         --chart-3: 197 37% 24%;
         --chart-4: 43 74% 66%;
         --chart-5: 27 87% 67%;
-        --radius: 0.5rem
+        --radius: 0.5rem;
     }
 
     .dark {
@@ -54,7 +55,7 @@
         --chart-2: 160 60% 45%;
         --chart-3: 30 80% 55%;
         --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%
+        --chart-5: 340 75% 55%;
     }
 }
 
@@ -66,30 +67,28 @@
     body {
         @apply bg-background text-foreground;
     }
-
 }
 
 .theme-switch {
     @apply fixed right-0 top-0 m-2 h-6 w-6 rounded-full p-2;
 }
 
-.active {
-    color: red;
-}
-
 .bt {
-    @apply text-white size-min bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm p-1 text-center me-2 mb-2
-}
-
-.disabled {
-    color: gray;
-    pointer-events: none;
+    @apply text-white size-min bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm p-1 text-center me-2 mb-2;
 }
 
 .menu {
     @apply fixed z-40 mb-2 flex w-full justify-center gap-4 border-2 bg-primary p-2 text-primary-foreground;
 }
 
+.active {
+    color: red;
+}
+
+.disabled {
+    color: gray;
+    pointer-events: none;
+}
 
 
 
