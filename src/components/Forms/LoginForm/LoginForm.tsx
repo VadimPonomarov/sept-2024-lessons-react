@@ -1,4 +1,5 @@
 import { IDummyAuth } from "@/common/interfaces/dummy.interfaces.ts";
+import ComboBox from "@/components/All/ComboBox/ComboBox.tsx";
 import { ResizableWrapper } from "@/components/All/ResizableWrapper/ResizableWrapper.tsx";
 import { useLoginForm } from "@/components/Forms/LoginForm/use-login-form.ts";
 import { Button } from "@/components/ui/button.tsx";
@@ -28,6 +29,7 @@ const LoginForm = () => {
   return (
     <div className={css.container}>
       <ResizableWrapper>
+        <ComboBox />
         <div className={"text-3xl text-center"}>Login</div>
         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
           {Object.entries(formFields).map(([key, { label, type }]) => (

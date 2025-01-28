@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 interface FetchProps<T> {
   cb: (params: Record<string, string>) => Promise<T>;
-  set: (data: T) => void;
+  set?: (data: T) => void;
   queryKey: string;
 }
 
-export const useFetch = <T,>({ cb, set, queryKey }: FetchProps<T>): void => {
+export const useFetch = <T,>({ cb, queryKey }: FetchProps<T>) => {
   const [urlSearchParams] = useSearchParams();
   const location = useLocation();
   const { data } = useQuery({
@@ -17,11 +16,5 @@ export const useFetch = <T,>({ cb, set, queryKey }: FetchProps<T>): void => {
     staleTime: Infinity,
   });
 
-  useEffect(() => {
-    if (data) {
-      set(data);
-    }
-  }, [data, set]);
-
-  return;
+  return { data };
 };

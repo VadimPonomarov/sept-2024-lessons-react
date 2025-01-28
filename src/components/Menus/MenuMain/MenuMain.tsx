@@ -1,53 +1,24 @@
-import { MenubarTrigger } from "@radix-ui/react-menubar";
-import { FC } from "react";
-import { NavLink } from "react-router-dom";
-
 import { useAppSelector } from "@/common/hooks/store/hooks.ts";
+import Menu from "@/components/All/MenuTemplate/Menu.tsx";
 import { Badge } from "@/components/ui/badge.tsx";
-import { Menubar, MenubarMenu } from "@/components/ui/menubar.tsx";
 
-type IProps = object;
-
-export const MenuMain: FC<IProps> = () => {
+export const MenuMain = () => {
   const { authMe } = useAppSelector(state => state.ini);
+  const menuItems = [
+    { path: "/", label: "Home" },
+    { path: "/users", label: "Users" },
+    { path: "/posts", label: "Posts", requiresAuth: true, disabled: !authMe },
+    { path: "/cars", label: "Cars" },
+    { path: "/auth", label: "Auth" },
+  ];
+
   return (
-    <Menubar className="fixed z-40 mb-2 flex w-full justify-center gap-4 border-2 bg-primary p-2 text-primary-foreground">
-      <MenubarMenu>
-        <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
-          <MenubarTrigger>Home</MenubarTrigger>
-        </NavLink>
-      </MenubarMenu>
-      <MenubarMenu>
-        <NavLink to="/users" className={({ isActive }) => (isActive ? "active" : "")}>
-          <MenubarTrigger>Users</MenubarTrigger>
-        </NavLink>
-      </MenubarMenu>
-      <MenubarMenu>
-        <NavLink
-          to="/posts"
-          className={({ isActive }) =>
-            (isActive ? "active" : "") + (!authMe ? " disabled" : "")
-          }
-          onClick={e => !authMe && e.preventDefault()}
-        >
-          <MenubarTrigger disabled={!authMe}>Posts</MenubarTrigger>
-        </NavLink>
-      </MenubarMenu>
-      <MenubarMenu>
-        <NavLink to="/cars" className={({ isActive }) => (isActive ? "active" : "")}>
-          <MenubarTrigger>Cars</MenubarTrigger>
-        </NavLink>
-      </MenubarMenu>
-      <MenubarMenu>
-        <NavLink to="/auth" className={({ isActive }) => (isActive ? "active" : "")}>
-          <MenubarTrigger>Auth</MenubarTrigger>
-        </NavLink>
-      </MenubarMenu>
+    <Menu items={menuItems}>
       {authMe && (
         <Badge variant="destructive" className={"absolute right-20"}>
           {authMe.firstName}
         </Badge>
       )}
-    </Menubar>
+    </Menu>
   );
 };

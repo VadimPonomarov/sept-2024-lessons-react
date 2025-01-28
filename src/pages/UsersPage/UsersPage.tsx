@@ -1,16 +1,16 @@
-import { FC, memo, useState } from "react";
+import { FC, memo } from "react";
 
 import { apiUsers } from "@/api/api-users.ts";
 import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
-import { IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
 import { PaginationComponent } from "@/components/All/PaginationComponent/PaginationComponent.tsx";
 import { UserCard } from "@/components/Cards/UserCard/UserCard.tsx";
 
 type IProps = object;
 export const UsersPage: FC<IProps> = memo(() => {
-  const [users, setUsers] = useState<IUsersResponse | undefined>(undefined);
-
-  useFetch({ set: setUsers, cb: apiUsers.users, queryKey: "users" });
+  const { data: users } = useFetch({
+    cb: apiUsers.users,
+    queryKey: "users",
+  });
 
   return (
     <div className={"relative mt-[40px] flex flex-wrap justify-evenly gap-2"}>
