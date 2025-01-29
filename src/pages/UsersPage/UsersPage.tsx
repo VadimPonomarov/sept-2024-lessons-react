@@ -10,6 +10,7 @@ import {IUsersResponse} from "@/common/interfaces/users.interfaces.ts";
 type IProps = object;
 export const UsersPage: FC<IProps> = memo(() => {
     const [params, setParams] = useSearchParams();
+    const skip = Number(params.get("skip") || "0");
     const limit = Number(params.get("limit") || "30");
     const {isFetching, isSuccess, data} = useFetch<IUsersResponse>({
         cb: apiUsers.users,
@@ -23,11 +24,11 @@ export const UsersPage: FC<IProps> = memo(() => {
 
     const handleObserver = (entries: IntersectionObserverEntry[]) => {
         const target = entries[0];
-        if (target.isIntersecting && !isFetching) {
+        if (target.isIntersecting && !isFetching && skip === 0 && limit >= 30) {
             console.log("Достигнут конец документа");
             setParams(prev => {
                 const newParams = new URLSearchParams(prev);
-                const newLimit = Math.min(limit + 30, +total); // Ограничиваем значение limit
+                const newLimit = Math.min(limit + 30, Number(total)); // Ограничиваем значение limit
                 if (newLimit > limit) {
                     newParams.set("limit", String(newLimit));
                 }
@@ -65,6 +66,7 @@ export const UsersPage: FC<IProps> = memo(() => {
         </div>
     );
 });
+
 
 
 
