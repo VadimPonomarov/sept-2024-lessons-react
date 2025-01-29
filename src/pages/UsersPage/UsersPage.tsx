@@ -1,4 +1,4 @@
-import {FC, memo, useEffect, useRef} from "react";
+import {FC, useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
 
 import {apiUsers} from "@/api/api-users.ts";
@@ -6,9 +6,13 @@ import {useFetch} from "@/common/hooks/use-fetch/useFetch.tsx";
 import {PaginationComponent} from "@/components/All/PaginationComponent/PaginationComponent.tsx";
 import {UserCard} from "@/components/Cards/UserCard/UserCard.tsx";
 import {IUsersResponse} from "@/common/interfaces/users.interfaces.ts";
+import {useInfiniteScroll} from "@/pages/UsersCartPage/use-infinite-scroll.ts";
 
-type IProps = object;
-export const UsersPage: FC<IProps> = memo(() => {
+type IProps = {
+    autoScrollLimit: number;
+};
+
+export const UsersPage: FC<IProps> = ({autoScrollLimit}) => {
     const [params, setParams] = useSearchParams();
     const skip = Number(params.get("skip") || "0");
     const limit = Number(params.get("limit") || "30");
@@ -19,37 +23,32 @@ export const UsersPage: FC<IProps> = memo(() => {
 
     const users = data?.users || [];
     const total = data?.total || 0;
-    const observer = useRef<IntersectionObserver | null>(null);
-    const lastElementRef = useRef<HTMLDivElement | null>(null);
 
-    const handleObserver = (entries: IntersectionObserverEntry[]) => {
-        const target = entries[0];
-        if (target.isIntersecting && !isFetching && skip === 0 && limit >= 30) {
-            console.log("Достигнут конец документа");
+    const {lastElementRef} = useInfiniteScroll(
+        isFetching,
+        () => {
             setParams(prev => {
                 const newParams = new URLSearchParams(prev);
-                const newLimit = Math.min(limit + 30, Number(total)); // Ограничиваем значение limit
-                if (newLimit > limit) {
+                const currentLimit = Number(prev.get("limit") || "30");
+                const newLimit = Math.min(currentLimit + limit, Number(total)); // Ограничиваем значение limit
+                if (newLimit > currentLimit) {
                     newParams.set("limit", String(newLimit));
                 }
                 return newParams;
             });
-        }
-    };
+        },
+        limit,
+        autoScrollLimit // Автоскролл включен, если limit >= autoScrollLimit
+    );
 
     useEffect(() => {
-        if (observer.current) observer.current.disconnect();
-        observer.current = new IntersectionObserver(handleObserver);
-        if (lastElementRef.current) observer.current.observe(lastElementRef.current);
-        return () => observer.current?.disconnect();
-    }, [isFetching]);
-
-    useEffect(() => {
-        if (observer.current) observer.current.disconnect();
-        observer.current = new IntersectionObserver(handleObserver);
-        if (lastElementRef.current) observer.current.observe(lastElementRef.current);
-        return () => observer.current?.disconnect();
-    }, [users]);
+        setParams(prev => {
+            const newParams = new URLSearchParams(prev);
+            newParams.set("skip", String(skip));
+            newParams.set("limit", String(limit));
+            return newParams;
+        });
+    }, [skip, limit]);
 
     return (
         <div className={"relative mt-[40px] flex flex-wrap justify-evenly gap-2"}>
@@ -65,7 +64,11 @@ export const UsersPage: FC<IProps> = memo(() => {
             </div>
         </div>
     );
-});
+};
+
+
+
+
 
 
 

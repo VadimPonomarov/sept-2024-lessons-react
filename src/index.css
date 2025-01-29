@@ -78,7 +78,7 @@
 }
 
 .menu {
-    @apply fixed z-40 mb-2 flex w-full justify-center gap-4 border-2 bg-primary p-2 text-primary-foreground;
+    @apply h-[45px] border-b-2 fixed z-40 mb-2 flex w-full justify-center gap-0  bg-primary p-2 text-primary-foreground;
 }
 
 .active {

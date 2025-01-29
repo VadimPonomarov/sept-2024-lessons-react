@@ -1,55 +1,47 @@
 import {useSearchParams} from "react-router-dom";
-import {useDeferredValue, useEffect, useState} from "react";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {XIcon} from "lucide-react";
 
-const SearchParamLimitSelector = () => {
+const SearchParamSkipSelector = () => {
     const [params, setParams] = useSearchParams();
-    const [inputValue, setInputValue] = useState(params.get("limit") || "30");
-    const deferredValue = useDeferredValue(inputValue);
 
-    const handleLimitChange = (value: string) => {
+    const handleSkipChange = (value: string) => {
         setParams(prev => {
             const newParams = new URLSearchParams(prev);
-            newParams.set("limit", value);
+            newParams.set("skip", value);
             return newParams;
         });
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value);
+        handleSkipChange(event.target.value);
     };
 
     const handleReset = () => {
-        setInputValue("30");
         setParams(prev => {
             const newParams = new URLSearchParams(prev);
-            newParams.set("limit", "30");
+            newParams.set("skip", "0");
             return newParams;
         });
     };
 
-    useEffect(() => {
-        handleLimitChange(deferredValue);
-    }, [deferredValue]);
-
     return (
         <div className="flex items-center gap-2">
-            <Button onClick={handleReset} className="text-xs">
-                <XIcon className="h-5 w-5"/>
+            <Button variant={"ghost"} onClick={handleReset} className="text-xs">
+                <XIcon className="w-3 p-0"/>
             </Button>
             <Input
                 type="number"
-                value={inputValue}
+                value={params.get("skip") || "0"}
                 onChange={handleInputChange}
                 className="w-[70px] border-none text-xs focus:border-none"
-                placeholder="Limit"
+                placeholder="Skip"
             />
         </div>
     );
 };
 
-export default SearchParamLimitSelector;
+export default SearchParamSkipSelector;
 
 

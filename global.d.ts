@@ -10,3 +10,6 @@ declare module '*.module.scss' {
 declare module "@heroics/react/solid";
 declare module "eslint-plugin-react-hooks";
 declare module "eslint-plugin-import";
+
+declare module '@heroicons/react/solid';
+
