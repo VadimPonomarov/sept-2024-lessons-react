@@ -2,7 +2,6 @@ import {useSearchParams} from "react-router-dom";
 import {useDeferredValue, useEffect, useState} from "react";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {XIcon} from "lucide-react";
 
 const SearchParamLimitSelector = () => {
     const [params, setParams] = useSearchParams();
@@ -36,8 +35,8 @@ const SearchParamLimitSelector = () => {
 
     return (
         <div className="flex items-center gap-2">
-            <Button onClick={handleReset} className="text-xs">
-                <XIcon className="h-5 w-5"/>
+            <Button variant={"ghost"} size={"icon"} onClick={handleReset} className="text-xs">
+                💥
             </Button>
             <Input
                 type="number"

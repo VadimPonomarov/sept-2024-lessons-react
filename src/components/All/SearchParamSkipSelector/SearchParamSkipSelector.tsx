@@ -1,7 +1,6 @@
 import {useSearchParams} from "react-router-dom";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {XIcon} from "lucide-react";
 
 const SearchParamSkipSelector = () => {
     const [params, setParams] = useSearchParams();
@@ -28,8 +27,8 @@ const SearchParamSkipSelector = () => {
 
     return (
         <div className="flex items-center gap-2">
-            <Button variant={"ghost"} onClick={handleReset} className="text-xs">
-                <XIcon className="w-3 p-0"/>
+            <Button variant={"ghost"} size={"icon"} onClick={handleReset} className="text-xs">
+                💥
             </Button>
             <Input
                 type="number"

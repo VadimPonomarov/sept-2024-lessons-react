@@ -3,15 +3,16 @@ import {useSearchParams} from "react-router-dom";
 
 import SearchParamLimitSelector from "@/components/All/SearchParamLimitSelector/SearchParamLimitSelector.tsx";
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
 } from "@/components/ui/pagination.tsx";
-import SearchParamSkipSelector from "@/components/SearchParamSkipSelector/SearchParamSkipSelector.tsx";
+import SearchParamSkipSelector from "@/components/All/SearchParamSkipSelector/SearchParamSkipSelector.tsx";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@radix-ui/react-tooltip";
 
 interface IProps {
     total: number;
@@ -37,9 +38,21 @@ export const PaginationComponent: FC<IProps> = ({total}) => {
     return (
         <>
             <Pagination>
-                <SearchParamSkipSelector/>
-                <SearchParamLimitSelector/>
                 <PaginationContent>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <SearchParamSkipSelector/>
+                            </TooltipTrigger>
+                            <TooltipContent
+                                side="bottom"
+                                className="bg-blue-100 text-blue-900 pl-5 pr-5 border rounded-[5px]"
+                            >
+                                <p>Skip</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                     {Number(params.get("skip")) >= Number(params.get("limit")) && (
                         <PaginationItem onClick={setPrev} style={{cursor: "pointer"}}>
                             <PaginationPrevious/>
@@ -47,8 +60,7 @@ export const PaginationComponent: FC<IProps> = ({total}) => {
                     )}
                     <PaginationItem style={{cursor: "pointer"}}>
                         <PaginationLink>
-                            {Math.floor(Number(params.get("skip")) / Number(params.get("limit"))) +
-                                1 || 1}
+                            {Math.floor(Number(params.get("skip")) / Number(params.get("limit"))) + 1 || 1}
                         </PaginationLink>
                     </PaginationItem>
                     <PaginationItem style={{cursor: "pointer"}}>
@@ -59,8 +71,22 @@ export const PaginationComponent: FC<IProps> = ({total}) => {
                             <PaginationNext/>
                         )}
                     </PaginationItem>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <SearchParamLimitSelector/>
+                            </TooltipTrigger>
+                            <TooltipContent
+                                side="bottom"
+                                className="bg-blue-100 text-blue-900 pl-5 pr-5 border rounded-[5px]"
+                            >
+                                <p>Limit</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </PaginationContent>
             </Pagination>
         </>
     );
 };
+

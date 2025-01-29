@@ -8,11 +8,7 @@ import {UserCard} from "@/components/Cards/UserCard/UserCard.tsx";
 import {IUsersResponse} from "@/common/interfaces/users.interfaces.ts";
 import {useInfiniteScroll} from "@/pages/UsersCartPage/use-infinite-scroll.ts";
 
-type IProps = {
-    autoScrollLimit: number;
-};
-
-export const UsersPage: FC<IProps> = ({autoScrollLimit}) => {
+export const UsersPage: FC = () => {
     const [params, setParams] = useSearchParams();
     const skip = Number(params.get("skip") || "0");
     const limit = Number(params.get("limit") || "30");
@@ -38,7 +34,7 @@ export const UsersPage: FC<IProps> = ({autoScrollLimit}) => {
             });
         },
         limit,
-        autoScrollLimit // Автоскролл включен, если limit >= autoScrollLimit
+        20 // Автоскролл включен, если limit >= 20
     );
 
     useEffect(() => {
@@ -65,6 +61,7 @@ export const UsersPage: FC<IProps> = ({autoScrollLimit}) => {
         </div>
     );
 };
+
 
 
 
