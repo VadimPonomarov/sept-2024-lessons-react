@@ -51,6 +51,7 @@
     "sass": "^1.83.4",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "use-debounce": "^10.0.4",
     "util": "^0.12.5",
     "uuid": "^11.0.5",
     "vaul": "^1.1.2",

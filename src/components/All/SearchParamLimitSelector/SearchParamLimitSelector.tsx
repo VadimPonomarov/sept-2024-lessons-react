@@ -1,12 +1,13 @@
 import {useSearchParams} from "react-router-dom";
-import {useDeferredValue, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
+import {useDebounce} from "use-debounce";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 
 const SearchParamLimitSelector = () => {
     const [params, setParams] = useSearchParams();
     const [inputValue, setInputValue] = useState(params.get("limit") || "30");
-    const deferredValue = useDeferredValue(inputValue);
+    const [debouncedValue] = useDebounce(inputValue, 500);
 
     const handleLimitChange = (value: string) => {
         setParams(prev => {
@@ -30,8 +31,12 @@ const SearchParamLimitSelector = () => {
     };
 
     useEffect(() => {
-        handleLimitChange(deferredValue);
-    }, [deferredValue]);
+        handleLimitChange(debouncedValue);
+    }, [debouncedValue]);
+
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+        event.target.select();
+    };
 
     return (
         <div className="flex items-center gap-2">
@@ -42,6 +47,7 @@ const SearchParamLimitSelector = () => {
                 type="number"
                 value={inputValue}
                 onChange={handleInputChange}
+                onFocus={handleFocus}
                 className="w-[70px] border-none text-xs focus:border-none"
                 placeholder="Limit"
             />
@@ -50,5 +56,7 @@ const SearchParamLimitSelector = () => {
 };
 
 export default SearchParamLimitSelector;
+
+
 
 
