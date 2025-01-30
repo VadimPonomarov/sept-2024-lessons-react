@@ -4,7 +4,7 @@ import { baseUrl } from "@/common/constants/constants.ts";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/store/useApp.ts";
 import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
-const useAuthInterceptors = (apiInstance: AxiosInstance) => {
+const useInterceptors = (apiInstance: AxiosInstance) => {
   const { accessToken, refreshToken } = useAppSelector(state => state.ini);
   const dispatch = useAppDispatch();
 
@@ -57,4 +57,4 @@ const useAuthInterceptors = (apiInstance: AxiosInstance) => {
   return [apiInstance];
 };
 
-export default useAuthInterceptors;
+export default useInterceptors;

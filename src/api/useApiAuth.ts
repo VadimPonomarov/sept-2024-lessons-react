@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { getAxiosService } from "@/api/getAxiosService.ts";
-import useAuthInterceptors from "@/api/useAuthInterceptors.tsx";
+import { getAxios } from "@/api/getAxios.ts";
+import useInterceptors from "@/api/useInterceptors.ts";
 import { baseUrl } from "@/common/constants/constants.ts";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/store/useApp.ts";
 import {
@@ -16,7 +16,7 @@ import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 const useApiAuth = () => {
   const { accessToken, refreshToken } = useAppSelector(state => state.ini);
   const dispatch = useAppDispatch();
-  const [apiPosts] = useAuthInterceptors(getAxiosService(baseUrl));
+  const [apiPosts] = useInterceptors(getAxios(baseUrl));
 
   const apiAuthService = {
     login: async (credentials: IDummyAuth): Promise<void> => {

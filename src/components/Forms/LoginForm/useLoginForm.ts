@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
-import useApiAuth from "@/api/useApiAuth.tsx";
+import useApiAuth from "@/api/useApiAuth.ts";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/store/useApp.ts";
 import { useEffectOnce } from "@/common/hooks/useEffectOnce.tsx";
 import { IDummyAuth } from "@/common/interfaces/dummy.interfaces.ts";

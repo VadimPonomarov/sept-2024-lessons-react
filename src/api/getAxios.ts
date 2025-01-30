@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getAxiosService = (baseUrl: string) =>
+export const getAxios = (baseUrl: string) =>
   axios.create({
     baseURL: baseUrl,
     timeout: 1000,

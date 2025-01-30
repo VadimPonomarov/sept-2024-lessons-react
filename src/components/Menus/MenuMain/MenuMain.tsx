@@ -7,7 +7,7 @@ export const MenuMain = () => {
   const menuItems = [
     { path: "/", label: "Home", disabled: !!authMe },
     { path: "/users", label: "Users", requiresAuth: true, disabled: !authMe },
-    { path: "/posts", label: "Posts", requiresAuth: true, disabled: !authMe },
+    { path: "/posts", label: "Recipes", requiresAuth: true, disabled: !authMe },
     { path: "/auth", label: "Auth" },
   ];
 

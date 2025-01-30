@@ -12,20 +12,20 @@ import {
 import styles from "./index.module.css";
 import { IProps } from "./interfaces";
 
-export const PostCard: FC<IProps> = ({ item }) => {
+export const RecipeCard: FC<IProps> = ({ item }) => {
   return (
     <Card className={styles.card}>
       <CardHeader>
         <CardTitle>
-          {item.id}: {item.title}
+          {item.id}: {item.name}
         </CardTitle>
         <CardDescription>Tags: {item.tags}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{item.body}</p>
+        <p>{item.cuisine}</p>
       </CardContent>
       <CardFooter>
-        <p className={styles.textSmall}>Views: {item.views}</p>
+        <p className={styles.textSmall}>Views: {item.instructions}</p>
       </CardFooter>
     </Card>
   );

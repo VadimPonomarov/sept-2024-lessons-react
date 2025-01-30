@@ -4,7 +4,7 @@ import { ICarsResponse as CR } from "@/common/interfaces/cars.interfaces.ts";
 import {
   IPostsResponse as PR,
   IPostsSearch as PS,
-} from "@/common/interfaces/posts.interfaces.ts";
+} from "@/common/interfaces/recipe.interfaces.ts";
 import {
   IUsersResponse as UR,
   IUsersSearch as US,
