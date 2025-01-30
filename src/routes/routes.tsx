@@ -6,6 +6,7 @@ import { RecipePage } from "@/pages/RecipePage/RecipePage.tsx";
 import { UsersPage } from "@/pages/UsersPage/UsersPage.tsx";
 import HomePage from "@/pages/HomePage/HomePage.tsx";
 import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage.tsx";
+import PaginationLayout from "@/layouts/Extra/PaginationLayout.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -13,9 +14,23 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "posts", element: <RecipePage /> },
       { path: "auth", element: <AuthPage /> },
-      { path: "users", element: <UsersPage /> },
+      {
+        path: "recipes",
+        element: (
+          <PaginationLayout>
+            <RecipePage />
+          </PaginationLayout>
+        ),
+      },
+      {
+        path: "users",
+        element: (
+          <PaginationLayout>
+            <UsersPage />
+          </PaginationLayout>
+        ),
+      },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

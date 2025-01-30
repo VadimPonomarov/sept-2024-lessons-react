@@ -22,7 +22,7 @@ import styles from "./index.module.css";
 import { usePaginationComponent } from "./usePaginationComponent";
 
 interface IProps {
-  total: number;
+  total?: number;
 }
 
 export const PaginationComponent: FC<IProps> = ({ total }) => {
