@@ -21,6 +21,7 @@ export const useInfiniteScroll = (
     observer.current = new IntersectionObserver(handleObserver);
     if (lastElementRef.current) observer.current.observe(lastElementRef.current);
     return () => observer.current?.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFetching, limit, autoScrollLimit]);
 
   return { lastElementRef };

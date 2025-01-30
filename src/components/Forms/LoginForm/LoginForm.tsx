@@ -1,22 +1,23 @@
-import { apiUsers } from "@/api/api-users.ts";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
+import { apiUsers } from "@/api/apiUsers.ts";
+import { useAppDispatch, useAppSelector } from "@/common/hooks/store/useApp.ts";
 import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
+import { useEffectOnce } from "@/common/hooks/useEffectOnce.tsx";
 import { IDummyAuth } from "@/common/interfaces/dummy.interfaces.ts";
 import { IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
 import ComboBox from "@/components/All/ComboBox/ComboBox.tsx";
 import { ResizableWrapper } from "@/components/All/ResizableWrapper/ResizableWrapper.tsx";
-import { useLoginForm } from "@/components/Forms/LoginForm/use-login-form.ts";
+import { useLoginForm } from "@/components/Forms/LoginForm/useLoginForm.ts";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
-
-import css from "@/components/Forms/LoginForm/form.module.css";
-import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useEffectOnce } from "@/common/hooks/useEffectOnce.tsx";
-import { useAppDispatch, useAppSelector } from "@/common/hooks/store/hooks.ts";
 import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
+import css from "@/components/Forms/LoginForm/index.module.css";
+
 const LoginForm = () => {
-  const [_, setParams] = useSearchParams();
+  const [, setParams] = useSearchParams();
   const { comboBoxItems: users } = useAppSelector(state => state.ini);
   const dispatch = useAppDispatch();
 
@@ -37,7 +38,7 @@ const LoginForm = () => {
       dispatch(iniActions.setComboBoxItems(data));
       dispatch(iniActions.setUsersAll(data.users));
     }
-  }, [data]);
+  }, [dispatch, data]);
 
   return (
     <div className={css.container}>

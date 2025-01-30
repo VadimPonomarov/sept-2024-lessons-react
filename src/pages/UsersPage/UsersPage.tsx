@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { apiUsers } from "@/api/api-users.ts";
+import { apiUsers } from "@/api/apiUsers.ts";
 import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
 import { IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
 import { PaginationComponent } from "@/components/All/PaginationComponent/PaginationComponent.tsx";
@@ -44,6 +44,7 @@ export const UsersPage: FC = () => {
       newParams.set("limit", String(limit));
       return newParams;
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip, limit]);
 
   return (

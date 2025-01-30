@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
-import { useAppSelector } from "@/common/hooks/store/hooks.ts";
+import { useAppSelector } from "@/common/hooks/store/useApp.ts";
 import { IMenuItem, IProps } from "@/components/All/MenuTemplate/menu.interfaces.ts";
 import { Menubar, MenubarMenu } from "@/components/ui/menubar.tsx";
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
+
 import { Input } from "@/components/ui/input.tsx";
 
 const SearchParamSkipSelector = () => {
@@ -31,6 +32,7 @@ const SearchParamSkipSelector = () => {
 
   useEffect(() => {
     handleSkipChange(debouncedValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {

@@ -1,6 +1,5 @@
 import { FC } from "react";
 
-import { IPost } from "@/common/interfaces/posts.interfaces.ts";
 import {
   Card,
   CardContent,
@@ -10,13 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card.tsx";
 
-type IProps = {
-  item: IPost;
-};
+import styles from "./index.module.css";
+import { IProps } from "./interfaces";
 
 export const PostCard: FC<IProps> = ({ item }) => {
   return (
-    <Card className={"h-[200px] w-[300px] overflow-auto"}>
+    <Card className={styles.card}>
       <CardHeader>
         <CardTitle>
           {item.id}: {item.title}
@@ -27,7 +25,7 @@ export const PostCard: FC<IProps> = ({ item }) => {
         <p>{item.body}</p>
       </CardContent>
       <CardFooter>
-        <p className={"text-small"}>Views: {item.views}</p>
+        <p className={styles.textSmall}>Views: {item.views}</p>
       </CardFooter>
     </Card>
   );

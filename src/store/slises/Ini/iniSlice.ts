@@ -4,8 +4,8 @@ import {
   IDummyAuthMeResponse,
   IDummyAuthRefreshResponse,
 } from "@/common/interfaces/dummy.interfaces.ts";
-import { initialState } from "@/store/slises/Ini/constants.ts";
 import { IUser, IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
+import { initialState } from "@/store/slises/Ini/constants.ts";
 
 const createSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
