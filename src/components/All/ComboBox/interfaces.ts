@@ -1,4 +1,5 @@
 interface IItem {
+  id: number;
   value: string;
   label: string;
 }

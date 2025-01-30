@@ -38,11 +38,11 @@ const ComboBox: React.FC<IProps> = ({ items = [], onSelect, label = "Select ..."
             <CommandGroup>
               {items.map(item => (
                 <CommandItem
-                  key={item.value}
+                  key={item.id}
                   value={item.value}
                   onSelect={currentValue => {
                     setValue(currentValue === value ? "" : currentValue);
-                    onSelect(Number(item.value));
+                    onSelect(Number(item.id));
                     setOpen(false);
                   }}
                 >

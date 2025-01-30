@@ -40,7 +40,8 @@ export const iniSlice = createSlice({
       state.comboBoxItems =
         action.payload?.users
           .map(item => ({
-            value: "" + item.id,
+            id: item.id,
+            value: `${item.firstName} ${item.lastName}`,
             label: `${item.firstName} ${item.lastName}`,
           }))
           .sort((a, b) => a.label.localeCompare(b.label)) || [];
