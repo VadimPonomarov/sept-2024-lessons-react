@@ -2,7 +2,6 @@ import { MenubarTrigger } from "@radix-ui/react-menubar";
 import { clsx } from "clsx";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-
 import { useAppSelector } from "@/common/hooks/store/useApp.ts";
 import { IMenuItem, IProps } from "@/components/All/MenuTemplate/menu.interfaces.ts";
 import { Menubar, MenubarMenu } from "@/components/ui/menubar.tsx";
@@ -11,10 +10,10 @@ const Menu: FC<IProps> = ({ children, items, className }) => {
   const { authMe } = useAppSelector(state => state.ini);
 
   const isDisabled = (item: IMenuItem) => {
-    if (!authMe && item.requiresAuth) {
-      return item.disabled ?? true;
+    if (item.requiresAuth && !authMe) {
+      return true;
     }
-    return false;
+    return item.disabled ?? false;
   };
 
   return (

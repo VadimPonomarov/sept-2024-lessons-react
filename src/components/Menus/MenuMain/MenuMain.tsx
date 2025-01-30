@@ -5,8 +5,8 @@ import { Badge } from "@/components/ui/badge.tsx";
 export const MenuMain = () => {
   const { authMe } = useAppSelector(state => state.ini);
   const menuItems = [
-    { path: "/", label: "Home" },
-    { path: "/users", label: "Users" },
+    { path: "/", label: "Home", disabled: !!authMe },
+    { path: "/users", label: "Users", requiresAuth: true, disabled: !authMe },
     { path: "/posts", label: "Posts", requiresAuth: true, disabled: !authMe },
     { path: "/auth", label: "Auth" },
   ];
