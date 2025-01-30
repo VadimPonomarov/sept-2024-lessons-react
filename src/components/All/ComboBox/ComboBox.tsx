@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check } from "lucide-react";
 import { useState } from "react";
 
 import { IProps } from "@/components/All/ComboBox/interfaces.ts";
@@ -28,7 +28,6 @@ const ComboBox: React.FC<IProps> = ({ items = [], onSelect, label = "Select ..."
           className="w-[200px] justify-between"
         >
           {value ? items.find(item => item.value === value)?.label : label}
-          <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
@@ -43,7 +42,7 @@ const ComboBox: React.FC<IProps> = ({ items = [], onSelect, label = "Select ..."
                   value={item.value}
                   onSelect={currentValue => {
                     setValue(currentValue === value ? "" : currentValue);
-                    onSelect(item);
+                    onSelect(Number(item.value));
                     setOpen(false);
                   }}
                 >

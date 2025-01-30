@@ -1,4 +1,7 @@
+import { apiUsers } from "@/api/api-users.ts";
+import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
 import { IDummyAuth } from "@/common/interfaces/dummy.interfaces.ts";
+import { IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
 import ComboBox from "@/components/All/ComboBox/ComboBox.tsx";
 import { ResizableWrapper } from "@/components/All/ResizableWrapper/ResizableWrapper.tsx";
 import { useLoginForm } from "@/components/Forms/LoginForm/use-login-form.ts";
@@ -6,30 +9,43 @@ import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 
 import css from "@/components/Forms/LoginForm/form.module.css";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useEffectOnce } from "@/common/hooks/useEffectOnce.tsx";
+import { useAppDispatch, useAppSelector } from "@/common/hooks/store/hooks.ts";
+import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 const LoginForm = () => {
-  const { register, handleSubmit, errors, isValid, handleReset, onSubmit } =
+  const [_, setParams] = useSearchParams();
+  const { comboBoxItems: users } = useAppSelector(state => state.ini);
+  const dispatch = useAppDispatch();
+
+  const { register, handleSubmit, errors, isValid, handleReset, onSubmit, formFields } =
     useLoginForm();
 
-  type FormField = {
-    label: string;
-    type: string;
-  };
+  const { data } = useFetch<IUsersResponse>({
+    queryKey: "users",
+    cb: apiUsers.users,
+  });
 
-  type FormFields = {
-    [key in keyof IDummyAuth]: FormField;
-  };
+  useEffectOnce(() => {
+    setParams({ limit: "0" });
+  });
 
-  const formFields: FormFields = {
-    username: { label: "Username", type: "text" },
-    password: { label: "Password", type: "password" },
-    expiresInMins: { label: "Expires In Minutes", type: "number" },
-  };
+  useEffect(() => {
+    if (data) {
+      dispatch(iniActions.setComboBoxItems(data));
+      dispatch(iniActions.setUsersAll(data.users));
+    }
+  }, [data]);
 
   return (
     <div className={css.container}>
       <ResizableWrapper>
-        <ComboBox />
+        <ComboBox
+          items={users || []}
+          onSelect={(id: number) => dispatch(iniActions.setCurrentUserById(id))}
+        />
         <div className={"text-3xl text-center"}>Login</div>
         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
           {Object.entries(formFields).map(([key, { label, type }]) => (

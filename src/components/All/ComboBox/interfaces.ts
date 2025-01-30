@@ -5,7 +5,7 @@ interface IItem {
 
 export interface IProps {
   items?: IItem[];
-  onSelect?: (item: IItem) => void;
+  onSelect?: (id: number) => void;
   label?: string;
 }
 
