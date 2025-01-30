@@ -11,18 +11,15 @@ import { RecipeCard } from "@/components/Cards/RecipeCard/RecipeCard.tsx";
 type IProps = object;
 
 export const RecipePage: FC<IProps> = () => {
-  const { apiRecipesService: apiRecipes } = useApRecipes();
-
   const [params, setParams] = useSearchParams();
   const skip = Number(params.get("skip") || "0");
   const limit = Number(params.get("limit") || "30");
+
+  const { apiRecipesService: apiRecipes } = useApRecipes();
   const { isFetching, data, isSuccess } = useFetch<IRecipeResponse>({
     cb: apiRecipes.recipes,
     queryKey: "recipes",
   });
-
-  const recipes = data?.recipes || [];
-  const total = data?.total || 0;
 
   const { lastElementRef } = useInfiniteScroll(
     isFetching,
@@ -30,7 +27,7 @@ export const RecipePage: FC<IProps> = () => {
       setParams(prev => {
         const newParams = new URLSearchParams(prev);
         const currentLimit = Number(prev.get("limit") || "30");
-        const newLimit = Math.min(currentLimit + limit, Number(total)); // Ограничиваем значение limit
+        const newLimit = Math.min(currentLimit + limit, Number(data?.total)); // Ограничиваем значение limit
         if (newLimit > currentLimit) {
           newParams.set("limit", String(newLimit));
         }
@@ -54,14 +51,14 @@ export const RecipePage: FC<IProps> = () => {
   return (
     <div className={"relative mt-[40px] flex flex-wrap justify-evenly gap-2"}>
       <div className={"fixed z-40 w-full"}>
-        {isSuccess && <PaginationComponent total={Number(total)} />}
+        {isSuccess && <PaginationComponent total={Number(data.total)} />}
       </div>
       <div className={"absolute top-[60px] flex w-full flex-wrap justify-evenly gap-2"}>
-        {isSuccess &&
-          recipes.map((item, index) => (
+        {data &&
+          data?.recipes.map((item, index) => (
             <div
               key={item.id}
-              ref={index === recipes.length - 1 ? lastElementRef : null}
+              ref={index === data?.recipes.length - 1 ? lastElementRef : null}
             >
               <RecipeCard item={item} />
             </div>

@@ -5,7 +5,6 @@ import {
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
 import { FC } from "react";
-import { useSearchParams } from "react-router-dom";
 
 import SearchParamLimitSelector from "@/components/All/SearchParamLimitSelector/SearchParamLimitSelector.tsx";
 import SearchParamSkipSelector from "@/components/All/SearchParamSkipSelector/SearchParamSkipSelector.tsx";
@@ -19,26 +18,16 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination.tsx";
 
+import styles from "./index.module.css";
+import { usePaginationComponent } from "./usePaginationComponent";
+
 interface IProps {
   total: number;
 }
 
 export const PaginationComponent: FC<IProps> = ({ total }) => {
-  const [params, setParams] = useSearchParams();
-
-  const setNext = () => {
-    const newSkip = (
-      Number(params.get("skip") || "0") + Number(params.get("limit") || "30")
-    ).toString();
-    setParams({ skip: newSkip, limit: params.get("limit") || "30" });
-  };
-
-  const setPrev = () => {
-    const newSkip = (
-      Number(params.get("skip") || "0") - Number(params.get("limit") || "30")
-    ).toString();
-    setParams({ skip: newSkip, limit: params.get("limit") || "30" });
-  };
+  const { setNext, setPrev, currentPage, hasNextPage, hasPrevPage } =
+    usePaginationComponent({ total });
 
   return (
     <>
@@ -49,43 +38,34 @@ export const PaginationComponent: FC<IProps> = ({ total }) => {
               <TooltipTrigger>
                 <SearchParamSkipSelector />
               </TooltipTrigger>
-              <TooltipContent
-                side="bottom"
-                className="bg-blue-100 text-blue-900 pl-5 pr-5 border rounded-[5px]"
-              >
+              <TooltipContent side="bottom" className={styles.tooltipContent}>
                 <p>Skip</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
 
-          {Number(params.get("skip")) >= Number(params.get("limit")) && (
+          {hasPrevPage && (
             <PaginationItem onClick={setPrev} style={{ cursor: "pointer" }}>
               <PaginationPrevious />
             </PaginationItem>
           )}
           <PaginationItem style={{ cursor: "pointer" }}>
-            <PaginationLink>
-              {Math.floor(Number(params.get("skip")) / Number(params.get("limit"))) +
-                1 || 1}
-            </PaginationLink>
+            <PaginationLink>{currentPage}</PaginationLink>
           </PaginationItem>
           <PaginationItem style={{ cursor: "pointer" }}>
             <PaginationEllipsis />
           </PaginationItem>
-          <PaginationItem onClick={setNext} style={{ cursor: "pointer" }}>
-            {(total - Number(params.get("skip"))) / Number(params.get("limit")) > 1 && (
+          {hasNextPage && (
+            <PaginationItem onClick={setNext} style={{ cursor: "pointer" }}>
               <PaginationNext />
-            )}
-          </PaginationItem>
+            </PaginationItem>
+          )}
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
                 <SearchParamLimitSelector />
               </TooltipTrigger>
-              <TooltipContent
-                side="bottom"
-                className="bg-blue-100 text-blue-900 pl-5 pr-5 border rounded-[5px]"
-              >
+              <TooltipContent side="bottom" className={styles.tooltipContent}>
                 <p>Limit</p>
               </TooltipContent>
             </Tooltip>

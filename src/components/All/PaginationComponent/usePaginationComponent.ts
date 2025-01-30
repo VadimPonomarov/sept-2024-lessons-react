@@ -1,0 +1,37 @@
+import { useSearchParams } from "react-router-dom";
+
+interface IProps {
+  total: number;
+}
+
+export const usePaginationComponent = ({ total }: IProps) => {
+  const [params, setParams] = useSearchParams();
+
+  const setNext = () => {
+    const newSkip = (
+      Number(params.get("skip") || "0") + Number(params.get("limit") || "30")
+    ).toString();
+    setParams({ skip: newSkip, limit: params.get("limit") || "30" });
+  };
+
+  const setPrev = () => {
+    const newSkip = (
+      Number(params.get("skip") || "0") - Number(params.get("limit") || "30")
+    ).toString();
+    setParams({ skip: newSkip, limit: params.get("limit") || "30" });
+  };
+
+  const currentPage =
+    Math.floor(Number(params.get("skip")) / Number(params.get("limit"))) + 1 || 1;
+  const hasNextPage =
+    (total - Number(params.get("skip"))) / Number(params.get("limit")) > 1;
+  const hasPrevPage = Number(params.get("skip")) >= Number(params.get("limit"));
+
+  return {
+    setNext,
+    setPrev,
+    currentPage,
+    hasNextPage,
+    hasPrevPage,
+  };
+};
