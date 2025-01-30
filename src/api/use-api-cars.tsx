@@ -1,4 +1,4 @@
-import { getAxiosService } from "@/api/get-axios-service.ts";
+import { getAxiosService } from "@/api/getAxiosService.ts";
 import { baseCarsUrl } from "@/common/constants/constants.ts";
 import {
   ICar,

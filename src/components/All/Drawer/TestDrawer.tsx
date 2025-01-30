@@ -3,7 +3,7 @@ import * as React from "react";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 
-import { useMediaQuery } from "@/common/hooks/use-media-query.tsx";
+import { useMediaQuery } from "@/common/hooks/useMediaQuery.tsx";
 import { TestDrawerCard } from "@/components/Cards/DrawerCard/TestDrawerCard.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {

@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/common/hooks/store/hooks.ts";
+import { useAppSelector } from "@/common/hooks/store/useApp.ts";
 import Menu from "@/components/All/MenuTemplate/Menu.tsx";
 import { Badge } from "@/components/ui/badge.tsx";
 
