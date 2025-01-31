@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { IProps, IResponse } from "./index.interfaces";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import styles from "./index.module.css";
 
 const UniversalFilter = <T,>({ queryKey, filterKeys }: IProps<T>) => {
   const [inputValues, setInputValues] = useState<{ [key in keyof T]?: string }>({});
@@ -37,16 +38,10 @@ const UniversalFilter = <T,>({ queryKey, filterKeys }: IProps<T>) => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {filterKeys.map(key => (
-        <div
-          key={String(key)}
-          style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}
-        >
-          <label
-            htmlFor={String(key)}
-            style={{ marginRight: "8px", textTransform: "capitalize" }}
-          >
+        <div key={String(key)} className={styles.inputContainer}>
+          <label htmlFor={String(key)} className={styles.label}>
             {String(key)}
           </label>
           <Input
@@ -55,10 +50,13 @@ const UniversalFilter = <T,>({ queryKey, filterKeys }: IProps<T>) => {
             onChange={e => handleInputChange(key, e.target.value)}
             onFocus={handleFocus}
             placeholder={`...`}
+            className={styles.input}
           />
         </div>
       ))}
-      <Button onClick={handleReset}>Reset</Button>
+      <Button onClick={handleReset} className={styles.button}>
+        Reset
+      </Button>
     </div>
   );
 };
