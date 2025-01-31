@@ -13,6 +13,7 @@ export const UsersPage: FC = () => {
   const { users, lastElementRef } = useUsersPage();
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const cb = (items: IUser[]) => dispatch(iniActions.setFilteredUsers(items));
 
   return (
     <div className={styles.container}>
@@ -21,8 +22,17 @@ export const UsersPage: FC = () => {
           <DialogModal label={"Filters"}>
             <UniversalFilter<IUser>
               queryKey={["users", location.pathname, location.search]}
-              filterKeys={["username", "lastName"]}
-              cb={(items: IUser[]) => dispatch(iniActions.setFilteredUsers(items))}
+              filterKeys={[
+                "username",
+                "firstName",
+                "lastName",
+                "email",
+                "age",
+                "gender",
+                "role",
+                "phone",
+              ]}
+              cb={cb}
               targetArrayKey="users"
             />
           </DialogModal>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { IProps, IResponse } from "./index.interfaces";
 import { useAppDispatch } from "@/common/hooks/store/useApp.ts";
@@ -9,12 +9,10 @@ const useUniversalFilter = <T>({ queryKey, filterKeys, targetArrayKey }: IProps<
   const [inputValues, setInputValues] = useState<{ [key in keyof T]?: string }>({});
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    // Получаем массив данных
-    const data = queryClient.getQueryData<IResponse<T>>(queryKey);
-    console.log("Fetched data from cache:", data); // Отладочное сообщение
 
-    // Применяем фильтрацию по полю username
+  useEffect(() => {
+    const data = queryClient.getQueryData<IResponse<T>>(queryKey);
+
     if (data && Array.isArray(data[targetArrayKey as keyof IResponse<T>])) {
       const filtered = (data[targetArrayKey as keyof IResponse<T>] as T[]).filter(
         user =>
@@ -23,10 +21,8 @@ const useUniversalFilter = <T>({ queryKey, filterKeys, targetArrayKey }: IProps<
           ),
       );
       dispatch(iniActions.setFilteredUsers(filtered as IUser[]));
-      console.log("Filtered data:", filtered);
-      // Обновляем состояние отфильтрованных данных
     }
-  }, [inputValues]);
+  }, [inputValues, queryClient, dispatch]);
 
   const handleInputChange = (key: keyof T, value: string) => {
     setInputValues(prev => ({ ...prev, [key]: value }));
