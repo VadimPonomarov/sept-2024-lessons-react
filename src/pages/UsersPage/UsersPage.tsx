@@ -12,10 +12,10 @@ export const UsersPage: FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.absoluteContainer}>
-        <div className={"w-screen flex items-center justify-center"}>
+        <div className="w-screen flex items-center justify-center">
           <UniversalFilter
             queryKey={["users", location.pathname, location.search]}
-            filterKeys={["name", "status"]}
+            filterKeys={["username"]} // Обновленный массив filterKeys
           />
         </div>
 
