@@ -1,42 +1,41 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { IProps, IResponse } from "./index.interfaces";
 import { Input } from "@/components/ui/input";
-import { IUser } from "@/common/interfaces/users.interfaces.ts";
+import { Button } from "@/components/ui/button";
 
-interface IResponse<T> {
-  users: T[];
-}
-
-interface UniversalFilterProps<T> {
-  queryKey: string[];
-  filterKeys: (keyof T)[];
-}
-
-const UniversalFilter: FC<UniversalFilterProps<IUser>> = ({ queryKey, filterKeys }) => {
-  const [inputValues, setInputValues] = useState<{ [key in keyof IUser]?: string }>({});
+const UniversalFilter = <T,>({ queryKey, filterKeys }: IProps<T>) => {
+  const [inputValues, setInputValues] = useState<{ [key in keyof T]?: string }>({});
   const queryClient = useQueryClient();
 
   useEffect(() => {
     // Получаем массив данных
-    const data = queryClient.getQueryData<IResponse<IUser>>(queryKey);
+    const data = queryClient.getQueryData<IResponse<T>>(queryKey);
     console.log("Fetched data from cache:", data); // Отладочное сообщение
 
     // Применяем фильтрацию по полю username
     if (data && Array.isArray(data.users)) {
       const filtered = data.users.filter(user =>
         filterKeys.every(key =>
-          new RegExp(inputValues[key] || "", "i").test(
-            String(user[key as keyof IUser]),
-          ),
+          new RegExp(inputValues[key] || "", "i").test(String(user[key as keyof T])),
         ),
       );
       console.log("Filtered data:", filtered); // Отладочное сообщение
     }
   }, [inputValues, queryClient, queryKey, filterKeys]);
 
-  const handleInputChange = (key: keyof IUser, value: string) => {
+  const handleInputChange = (key: keyof T, value: string) => {
     setInputValues(prev => ({ ...prev, [key]: value }));
   };
+
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    event.target.select();
+  };
+
+  const handleReset = () => {
+    setInputValues({});
+  };
+
   return (
     <div>
       {filterKeys.map(key => (
@@ -54,10 +53,12 @@ const UniversalFilter: FC<UniversalFilterProps<IUser>> = ({ queryKey, filterKeys
             id={String(key)}
             value={inputValues[key] || ""}
             onChange={e => handleInputChange(key, e.target.value)}
-            placeholder={`Введите значение для фильтрации по ${String(key)}`}
+            onFocus={handleFocus}
+            placeholder={`...`}
           />
         </div>
       ))}
+      <Button onClick={handleReset}>Reset</Button>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useUsersPage } from "./useUsersPage";
 import styles from "./index.module.css";
 import { useLocation } from "react-router-dom";
 import UniversalFilter from "@/components/All/FilterInput/FilterInput.tsx";
+import { IUser } from "@/common/interfaces/users.interfaces.ts";
 
 export const UsersPage: FC = () => {
   const { isSuccess, users, lastElementRef } = useUsersPage();
@@ -13,9 +14,9 @@ export const UsersPage: FC = () => {
     <div className={styles.container}>
       <div className={styles.absoluteContainer}>
         <div className="w-screen flex items-center justify-center">
-          <UniversalFilter
+          <UniversalFilter<IUser>
             queryKey={["users", location.pathname, location.search]}
-            filterKeys={["username"]} // Обновленный массив filterKeys
+            filterKeys={["username", "lastName"]}
           />
         </div>
 
