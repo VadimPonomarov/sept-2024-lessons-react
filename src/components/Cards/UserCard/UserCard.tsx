@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 
 import { useAppDispatch } from "@/common/hooks/store/useApp.ts";
-import { TestDrawer } from "@/components/All/Drawer/TestDrawer.tsx";
+import { UserCartModal } from "@/components/All/UserCartModal/UserCartModal.tsx";
 import {
   Card,
   CardContent,
@@ -36,7 +36,7 @@ export const UserCard: FC<IProps> = ({ item }) => {
   return (
     <div className={"relative"}>
       <span className={styles.btn_container}>
-        <TestDrawer userId={"" + item.id} />
+        <UserCartModal userId={"" + item.id} />
         <button type="button" className="bt m-2" onClick={handleClickToAuth}>
           Auth
         </button>

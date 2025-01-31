@@ -26,7 +26,7 @@ interface IProps {
   setOpen?: (open: boolean) => void;
 }
 
-export const TestDrawer: FC<IProps> = ({ userId }) => {
+export const UserCartModal: FC<IProps> = ({ userId }) => {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const { userId: user_id } = useParams();

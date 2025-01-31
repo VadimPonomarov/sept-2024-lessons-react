@@ -5,6 +5,7 @@ import styles from "./index.module.css";
 import { useLocation } from "react-router-dom";
 import UniversalFilter from "@/components/All/FilterInput/FilterInput.tsx";
 import { IUser } from "@/common/interfaces/users.interfaces.ts";
+import DialogModal from "@/components/All/Modals/DialogModal.tsx";
 
 export const UsersPage: FC = () => {
   const { isSuccess, users, lastElementRef } = useUsersPage();
@@ -14,10 +15,12 @@ export const UsersPage: FC = () => {
     <div className={styles.container}>
       <div className={styles.absoluteContainer}>
         <div className="w-screen flex items-center justify-center">
-          <UniversalFilter<IUser>
-            queryKey={["users", location.pathname, location.search]}
-            filterKeys={["username", "lastName"]}
-          />
+          <DialogModal label={"Filters"}>
+            <UniversalFilter<IUser>
+              queryKey={["users", location.pathname, location.search]}
+              filterKeys={["username", "lastName"]}
+            />
+          </DialogModal>
         </div>
 
         {isSuccess &&
