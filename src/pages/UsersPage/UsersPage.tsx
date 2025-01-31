@@ -11,7 +11,6 @@ import { useAppDispatch } from "@/common/hooks/store/useApp.ts";
 
 export const UsersPage: FC = () => {
   const { users, lastElementRef } = useUsersPage();
-  // const { filteredUsers } = useAppSelector(state => state.ini);
   const location = useLocation();
   const dispatch = useAppDispatch();
 

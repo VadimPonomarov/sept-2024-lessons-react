@@ -26,7 +26,7 @@ const useUniversalFilter = <T>({ queryKey, filterKeys, targetArrayKey }: IProps<
       console.log("Filtered data:", filtered);
       // Обновляем состояние отфильтрованных данных
     }
-  }, [inputValues, queryKey, filterKeys, targetArrayKey]);
+  }, [inputValues]);
 
   const handleInputChange = (key: keyof T, value: string) => {
     setInputValues(prev => ({ ...prev, [key]: value }));

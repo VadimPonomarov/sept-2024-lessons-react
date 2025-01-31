@@ -5,7 +5,7 @@ import { apiUsers } from "@/api/apiUsers.ts";
 import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
 import { IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
 import { useInfiniteScroll } from "@/pages/UsersCartPage/use-infinite-scroll.ts";
-import { useAppDispatch } from "@/common/hooks/store/useApp.ts";
+import { useAppDispatch, useAppSelector } from "@/common/hooks/store/useApp.ts";
 import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 export const useUsersPage = () => {
@@ -13,17 +13,19 @@ export const useUsersPage = () => {
   const skip = Number(params.get("skip") || "0");
   const limit = Number(params.get("limit") || "30");
   const dispatch = useAppDispatch();
+  const { filteredUsers } = useAppSelector(state => state.ini);
   const { isFetching, isSuccess, data } = useFetch<IUsersResponse>({
     cb: apiUsers.users,
     queryKey: "users",
   });
 
-  const users = data?.users || [];
+  const users = filteredUsers || data?.users || [];
   const total = data?.total || 0;
 
   useEffect(() => {
     if (data) {
       dispatch(iniActions.setUsersAll(data.users));
+      dispatch(iniActions.setFilteredUsers(data.users));
     }
   }, [data]);
 
