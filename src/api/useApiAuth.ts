@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { getAxios } from "@/api/getAxios.ts";
-import useInterceptors from "@/api/useInterceptors.ts";
+import { getAxios } from "@/api/axios/getAxios.ts";
+import useInterceptors from "@/api/interseptors/useInterceptors.tsx";
 import { baseUrl } from "@/common/constants/constants.ts";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/store/useApp.ts";
 import {

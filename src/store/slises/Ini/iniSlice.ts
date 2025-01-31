@@ -27,6 +27,9 @@ export const iniSlice = createSlice({
     setMe: create.reducer<IDummyAuthMeResponse>((state, action) => {
       state.authMe = action.payload;
     }),
+    setCurrentUserById: create.reducer<number>((state, action) => {
+      state.currentUser = state.usersAll?.find(user => user.id === action.payload);
+    }),
     unsetMe: create.reducer<void>(state => {
       state.authMe = undefined;
     }),

@@ -1,12 +1,10 @@
 import { AxiosInstance } from "axios";
 
 import { baseUrl } from "@/common/constants/constants.ts";
-import { useAppDispatch, useAppSelector } from "@/common/hooks/store/useApp.ts";
-import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
+import { useAppSelector } from "@/common/hooks/store/useApp.ts";
 
 const useInterceptors = (apiInstance: AxiosInstance) => {
   const { accessToken, refreshToken } = useAppSelector(state => state.ini);
-  const dispatch = useAppDispatch();
 
   if (accessToken) {
     apiInstance.interceptors.request.use(
@@ -39,7 +37,6 @@ const useInterceptors = (apiInstance: AxiosInstance) => {
             };
             const response = await apiInstance.post(baseUrl + "/auth/refresh", body);
 
-            dispatch(iniActions.setTokenPair(response.data));
             originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
             return apiInstance(originalRequest);
           } catch (refreshError) {
@@ -47,7 +44,6 @@ const useInterceptors = (apiInstance: AxiosInstance) => {
             return Promise.reject(refreshError);
           }
         }
-        dispatch(iniActions.unsetTokenPair());
         console.error("Request error:", error);
         return Promise.reject(error);
       },

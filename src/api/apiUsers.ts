@@ -4,7 +4,7 @@ import {
   IUsersResponse,
   IUsersSearch,
 } from "@/common/interfaces/users.interfaces.ts";
-import { getAxios } from "@/api/getAxios.ts";
+import { getAxios } from "@/api/axios/getAxios.ts";
 import { baseUrl } from "@/common/constants/constants.ts";
 
 const api = getAxios(baseUrl + "/users");
