@@ -7,15 +7,23 @@ interface IDataItem {
   name: string;
   status: string;
   // Добавьте другие поля по необходимости
+  data: ISubItem[];
+}
+
+interface ISubItem {
+  subId: number;
+  subName: string;
+  subStatus: string;
+  // Добавьте другие поля по необходимости
 }
 
 interface UniversalFilterProps {
   queryKey: string[];
-  filterKeys: (keyof IDataItem)[];
+  filterKeys: (keyof ISubItem)[];
 }
 
 const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => {
-  const [inputValues, setInputValues] = useState<{ [key in keyof IDataItem]?: string }>(
+  const [inputValues, setInputValues] = useState<{ [key in keyof ISubItem]?: string }>(
     {},
   );
   const [filteredData, setFilteredData] = useState<IDataItem[]>([]);
@@ -26,13 +34,16 @@ const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => 
       const data = queryClient.getQueryData<IDataItem[]>(queryKey);
       console.log("Fetched data from cache:", data); // Отладочное сообщение
       if (data) {
-        const filtered = data.filter(item =>
-          filterKeys.every(key =>
-            String(item[key])
-              .toLowerCase()
-              .includes(inputValues[key]?.toLowerCase() || ""),
+        const filtered = data.map(item => ({
+          ...item,
+          data: item.data.filter(subItem =>
+            filterKeys.every(key =>
+              String(subItem[key])
+                .toLowerCase()
+                .includes(inputValues[key]?.toLowerCase() || ""),
+            ),
           ),
-        );
+        }));
         console.log("Filtered data:", filtered); // Отладочное сообщение
         setFilteredData(filtered);
       }
@@ -41,7 +52,7 @@ const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => 
     return () => clearTimeout(timeoutId);
   }, [inputValues, queryClient, queryKey, filterKeys]);
 
-  const handleInputChange = (key: keyof IDataItem, value: string) => {
+  const handleInputChange = (key: keyof ISubItem, value: string) => {
     setInputValues(prev => ({ ...prev, [key]: value }));
   };
 
@@ -69,15 +80,20 @@ const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => 
             id={String(key)}
             value={inputValues[key] || ""}
             onChange={e => handleInputChange(key, e.target.value)}
-            placeholder={`Введите значение`}
+            placeholder={`Введите значение для фильтрации по ${String(key)}`}
           />
         </div>
       ))}
       <div>
         {filteredData.map(item => (
           <div key={item.id}>
-            {filterKeys.map(key => (
-              <span key={String(key)}>{renderValue(item[key])} </span>
+            <h3>{item.name}</h3>
+            {item.data.map(subItem => (
+              <div key={subItem.subId}>
+                {filterKeys.map(key => (
+                  <span key={String(key)}>{renderValue(subItem[key])} </span>
+                ))}
+              </div>
             ))}
           </div>
         ))}
