@@ -3,24 +3,22 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Input } from "@/components/ui/input";
 import { IUser } from "@/common/interfaces/users.interfaces.ts";
 
-interface IUsersResponse {
-  users: IUser[];
+interface IResponse<T> {
+  users: T[];
 }
 
-interface UniversalFilterProps {
+interface UniversalFilterProps<T> {
   queryKey: string[];
-  filterKeys: (keyof IUser)[];
+  filterKeys: (keyof T)[];
 }
 
-const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => {
-  const [inputValues, setInputValues] = useState<{ [key in keyof IUser]?: string }>({
-    username: "emma", // Значение по умолчанию
-  });
+const UniversalFilter: FC<UniversalFilterProps<IUser>> = ({ queryKey, filterKeys }) => {
+  const [inputValues, setInputValues] = useState<{ [key in keyof IUser]?: string }>({});
   const queryClient = useQueryClient();
 
   useEffect(() => {
     // Получаем массив данных
-    const data = queryClient.getQueryData<IUsersResponse>(queryKey);
+    const data = queryClient.getQueryData<IResponse<IUser>>(queryKey);
     console.log("Fetched data from cache:", data); // Отладочное сообщение
 
     // Применяем фильтрацию по полю username
@@ -39,7 +37,6 @@ const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => 
   const handleInputChange = (key: keyof IUser, value: string) => {
     setInputValues(prev => ({ ...prev, [key]: value }));
   };
-
   return (
     <div>
       {filterKeys.map(key => (
