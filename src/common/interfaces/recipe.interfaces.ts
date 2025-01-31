@@ -1,4 +1,4 @@
-export interface IRecipes {
+export interface IRecipe {
   id: number;
   name: string;
   ingredients: string[];
@@ -18,7 +18,7 @@ export interface IRecipes {
 }
 
 export interface IRecipeResponse extends IRecipeSearch {
-  recipes: IRecipes[];
+  recipes: IRecipe[];
 }
 
 export interface IRecipeSearch {

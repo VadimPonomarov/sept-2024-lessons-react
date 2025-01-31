@@ -5,11 +5,14 @@ import { apiUsers } from "@/api/apiUsers.ts";
 import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
 import { IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
 import { useInfiniteScroll } from "@/pages/UsersCartPage/use-infinite-scroll.ts";
+import { useAppDispatch } from "@/common/hooks/store/useApp.ts";
+import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 export const useUsersPage = () => {
   const [params, setParams] = useSearchParams();
   const skip = Number(params.get("skip") || "0");
   const limit = Number(params.get("limit") || "30");
+  const dispatch = useAppDispatch();
   const { isFetching, isSuccess, data } = useFetch<IUsersResponse>({
     cb: apiUsers.users,
     queryKey: "users",
@@ -17,6 +20,10 @@ export const useUsersPage = () => {
 
   const users = data?.users || [];
   const total = data?.total || 0;
+
+  useEffect(() => {
+    dispatch(iniActions.setFilteredUsers(data.users));
+  }, [data]);
 
   const { lastElementRef } = useInfiniteScroll(
     isFetching,
