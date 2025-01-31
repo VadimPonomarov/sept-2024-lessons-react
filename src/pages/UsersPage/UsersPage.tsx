@@ -2,13 +2,23 @@ import { FC } from "react";
 import { UserCard } from "@/components/Cards/UserCard/UserCard.tsx";
 import { useUsersPage } from "./useUsersPage";
 import styles from "./index.module.css";
+import { useLocation } from "react-router-dom";
+import UniversalFilter from "@/components/All/FilterInput/FilterInput.tsx";
 
 export const UsersPage: FC = () => {
   const { isSuccess, users, lastElementRef } = useUsersPage();
+  const location = useLocation();
 
   return (
     <div className={styles.container}>
       <div className={styles.absoluteContainer}>
+        <div className={"w-screen flex items-center justify-center"}>
+          <UniversalFilter
+            queryKey={["users", location.pathname, location.search]}
+            filterKeys={["name", "status"]}
+          />
+        </div>
+
         {isSuccess &&
           users.map((item, index) => (
             <div key={item.id} ref={index === users.length - 1 ? lastElementRef : null}>
