@@ -55,12 +55,23 @@ const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => 
   return (
     <div>
       {filterKeys.map(key => (
-        <Input
+        <div
           key={String(key)}
-          value={inputValues[key] || ""}
-          onChange={e => handleInputChange(key, e.target.value)}
-          placeholder={`${String(key)}`}
-        />
+          style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}
+        >
+          <label
+            htmlFor={String(key)}
+            style={{ marginRight: "8px", textTransform: "capitalize" }}
+          >
+            {String(key)}
+          </label>
+          <Input
+            id={String(key)}
+            value={inputValues[key] || ""}
+            onChange={e => handleInputChange(key, e.target.value)}
+            placeholder={`Введите значение`}
+          />
+        </div>
       ))}
       <div>
         {filteredData.map(item => (
