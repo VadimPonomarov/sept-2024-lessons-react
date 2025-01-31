@@ -4,11 +4,18 @@ import styles from "./index.module.css";
 import useUniversalFilter from "./useUniversalFilter";
 import { IProps } from "./index.interfaces";
 
-const UniversalFilter = <T,>({ queryKey, filterKeys }: IProps<T>) => {
+const UniversalFilter = <T,>({
+  queryKey,
+  filterKeys,
+  cb,
+  targetArrayKey,
+}: IProps<T>) => {
   const { inputValues, handleInputChange, handleFocus, handleReset } =
     useUniversalFilter<T>({
       queryKey,
       filterKeys,
+      cb,
+      targetArrayKey,
     });
 
   return (

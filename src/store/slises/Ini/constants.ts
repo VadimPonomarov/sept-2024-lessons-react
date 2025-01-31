@@ -6,5 +6,7 @@ export const initialState: IniState = {
   authMe: undefined,
   comboBoxItems: undefined,
   usersAll: undefined,
+  filteredUsers: undefined,
+  filteredRecipes: undefined,
   currentUser: undefined,
 };

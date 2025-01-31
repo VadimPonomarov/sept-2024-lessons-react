@@ -8,6 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FC } from "react";
+import styles from "./index.module.css";
 
 interface IProps {
   children?: React.ReactNode;
@@ -18,9 +19,11 @@ const DialogModal: FC<IProps> = ({ children, label = "Open" }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">{label}</Button>
+        <Button className={styles.button} variant="link">
+          {label}
+        </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className={styles.dialogContent}>
         <DialogHeader>
           <DialogTitle>Filter</DialogTitle>
           <DialogDescription />
@@ -30,4 +33,5 @@ const DialogModal: FC<IProps> = ({ children, label = "Open" }) => {
     </Dialog>
   );
 };
+
 export default DialogModal;

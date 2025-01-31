@@ -6,6 +6,7 @@ import {
 } from "@/common/interfaces/dummy.interfaces.ts";
 import { IUser, IUsersResponse } from "@/common/interfaces/users.interfaces.ts";
 import { initialState } from "@/store/slises/Ini/constants.ts";
+import { IRecipe } from "@/common/interfaces/recipe.interfaces.ts";
 
 const createSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -32,8 +33,18 @@ export const iniSlice = createSlice({
     setUsersAll: create.reducer<IUser[]>((state, action) => {
       state.usersAll = action.payload;
     }),
-    setCurrentUserById: create.reducer<number>((state, action) => {
-      state.currentUser = state.usersAll?.find(user => user.id === action.payload);
+
+    setFilteredUsers: create.reducer<IUser[]>((state, action) => {
+      state.filteredUsers = action.payload;
+    }),
+    unsetFilteredUsers: create.reducer<void>(state => {
+      state.filteredUsers = undefined;
+    }),
+    setFilteredRecipes: create.reducer<IRecipe[]>((state, action) => {
+      state.filteredRecipes = action.payload;
+    }),
+    unsetFilteredRecipes: create.reducer<void>(state => {
+      state.filteredRecipes = undefined;
     }),
 
     setComboBoxItems: create.reducer<IUsersResponse>((state, action) => {
