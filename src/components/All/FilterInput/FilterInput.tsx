@@ -1,58 +1,42 @@
 import { FC, ReactNode, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Input } from "@/components/ui/input";
+import { IUser } from "@/common/interfaces/users.interfaces.ts";
 
-interface IDataItem {
-  id: number;
-  name: string;
-  status: string;
-  // Добавьте другие поля по необходимости
-  data: ISubItem[];
-}
-
-interface ISubItem {
-  subId: number;
-  subName: string;
-  subStatus: string;
-  // Добавьте другие поля по необходимости
+interface IUsersResponse {
+  users: IUser[];
 }
 
 interface UniversalFilterProps {
   queryKey: string[];
-  filterKeys: (keyof ISubItem)[];
+  filterKeys: (keyof IUser)[];
 }
 
 const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => {
-  const [inputValues, setInputValues] = useState<{ [key in keyof ISubItem]?: string }>(
-    {},
-  );
-  const [filteredData, setFilteredData] = useState<IDataItem[]>([]);
+  const [inputValues, setInputValues] = useState<{ [key in keyof IUser]?: string }>({
+    username: "emma", // Значение по умолчанию
+  });
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      const data = queryClient.getQueryData<IDataItem[]>(queryKey);
-      console.log("Fetched data from cache:", data); // Отладочное сообщение
-      if (data) {
-        const filtered = data.map(item => ({
-          ...item,
-          data: item.data.filter(subItem =>
-            filterKeys.every(key =>
-              String(subItem[key])
-                .toLowerCase()
-                .includes(inputValues[key]?.toLowerCase() || ""),
-            ),
-          ),
-        }));
-        console.log("Filtered data:", filtered); // Отладочное сообщение
-        setFilteredData(filtered);
-      }
-    }, 300); // Задержка перед фильтрацией
+    // Получаем массив данных
+    const data = queryClient.getQueryData<IUsersResponse>(queryKey);
+    console.log("Fetched data from cache:", data); // Отладочное сообщение
 
-    return () => clearTimeout(timeoutId);
+    // Применяем фильтрацию по полю username
+    if (data && Array.isArray(data.users)) {
+      const filtered = data.users.filter(user =>
+        filterKeys.every(key =>
+          new RegExp(inputValues[key] || "", "i").test(
+            String(user[key as keyof IUser]),
+          ),
+        ),
+      );
+      console.log("Filtered data:", filtered); // Отладочное сообщение
+    }
   }, [inputValues, queryClient, queryKey, filterKeys]);
 
-  const handleInputChange = (key: keyof ISubItem, value: string) => {
+  const handleInputChange = (key: keyof IUser, value: string) => {
     setInputValues(prev => ({ ...prev, [key]: value }));
   };
 
@@ -85,15 +69,13 @@ const UniversalFilter: FC<UniversalFilterProps> = ({ queryKey, filterKeys }) => 
         </div>
       ))}
       <div>
-        {filteredData.map(item => (
-          <div key={item.id}>
-            <h3>{item.name}</h3>
-            {item.data.map(subItem => (
-              <div key={subItem.subId}>
-                {filterKeys.map(key => (
-                  <span key={String(key)}>{renderValue(subItem[key])} </span>
-                ))}
-              </div>
+        {queryClient.getQueryData<IUsersResponse>(queryKey)?.users.map(user => (
+          <div key={user.id}>
+            <h3>
+              {user.firstName} {user.lastName}
+            </h3>
+            {Object.keys(user).map(key => (
+              <span key={key}>{renderValue(user[key as keyof IUser])} </span>
             ))}
           </div>
         ))}
