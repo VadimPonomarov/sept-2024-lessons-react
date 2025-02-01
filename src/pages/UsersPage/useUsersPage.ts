@@ -19,15 +19,24 @@ export const useUsersPage = () => {
     queryKey: "users",
   });
 
-  const users = filteredUsers || data?.users || [];
-  const total = data?.total || 0;
+  let users = filteredUsers || data?.users || [];
+  let total = data?.total || skip + limit;
 
   useEffect(() => {
     if (data) {
       dispatch(iniActions.setUsersAll(data.users));
       dispatch(iniActions.setFilteredUsers(data.users));
+      if (!filteredUsers) {
+        total = data?.total || 0;
+      }
     }
   }, [data]);
+
+  useEffect(() => {
+    if (filteredUsers) {
+      total = filteredUsers?.length.toString() || 0;
+    }
+  }, [filteredUsers]);
 
   const { lastElementRef } = useInfiniteScroll(
     isFetching,

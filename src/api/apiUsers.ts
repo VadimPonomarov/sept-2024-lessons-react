@@ -12,7 +12,7 @@ export const apiUsers = {
   users: async (params?: Partial<IUsersSearch>): Promise<IUsersResponse> => {
     try {
       const qParams = new URLSearchParams(params as Record<string, string>);
-      const response = await api.get("/", {
+      const response = await api.get("", {
         params: qParams,
       });
       return await response.data;

@@ -6,8 +6,8 @@ import { RecipePage } from "@/pages/RecipePage/RecipePage.tsx";
 import { UsersPage } from "@/pages/UsersPage/UsersPage.tsx";
 import HomePage from "@/pages/HomePage/HomePage.tsx";
 import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage.tsx";
-import PaginationLayout from "@/layouts/Extra/PaginationLayout.tsx";
-import ShouldAuth from "@/components/HOC/ShouldAuth.tsx";
+import WithPagination from "@/common/HOC/WithPagination.tsx";
+import ShouldAuth from "@/common/HOC/ShouldAuth.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -20,9 +20,9 @@ export const router = createBrowserRouter([
         path: "recipes",
         element: (
           <ShouldAuth>
-            <PaginationLayout>
+            <WithPagination>
               <RecipePage />
-            </PaginationLayout>
+            </WithPagination>
           </ShouldAuth>
         ),
       },
@@ -30,9 +30,9 @@ export const router = createBrowserRouter([
         path: "users",
         element: (
           <ShouldAuth>
-            <PaginationLayout>
+            <WithPagination>
               <UsersPage />
-            </PaginationLayout>
+            </WithPagination>
           </ShouldAuth>
         ),
       },

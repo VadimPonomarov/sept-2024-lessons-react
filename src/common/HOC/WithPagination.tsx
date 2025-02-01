@@ -6,7 +6,7 @@ interface IProps {
   className?: string;
 }
 
-const PaginationLayout: FC<IProps> = ({
+const WithPagination: FC<IProps> = ({
   children,
   className = "z-50 fixed flex w-full justify-center top-[60px]",
 }) => {
@@ -20,4 +20,4 @@ const PaginationLayout: FC<IProps> = ({
   );
 };
 
-export default PaginationLayout;
+export default WithPagination;
