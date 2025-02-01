@@ -25,7 +25,7 @@ export const RecipeCard: FC<IProps> = ({ item }) => {
             {String(item.tags)
               .split(",")
               .map(item => (
-                <Button variant={"outline"} className={"h-auto w-auto p-1"}>
+                <Button variant={"outline"} className={"h-auto w-auto p-0"}>
                   {item}
                 </Button>
               ))}

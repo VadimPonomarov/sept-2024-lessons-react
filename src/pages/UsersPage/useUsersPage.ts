@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { apiUsers } from "@/api/apiUsers.ts";
@@ -10,8 +10,8 @@ import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 export const useUsersPage = () => {
   const [params, setParams] = useSearchParams();
-  let skip = Number(params.get("skip") || "0");
-  let limit = Number(params.get("limit") || "30");
+  const skip = Number(params.get("skip") || "0");
+  const limit = Number(params.get("limit") || "30");
   const dispatch = useAppDispatch();
   const { filteredUsers } = useAppSelector(state => state.ini);
   const { isFetching, isSuccess, data } = useFetch<IUsersResponse>({
@@ -19,24 +19,20 @@ export const useUsersPage = () => {
     queryKey: "users",
   });
 
-  let users = filteredUsers || data?.users || [];
-  let total = data?.total || skip + limit;
+  const users = useMemo(() => {
+    return filteredUsers.length > 0 ? filteredUsers : data?.users || [];
+  }, [filteredUsers, data]);
+
+  const total = useMemo(() => {
+    return filteredUsers.length > 0 ? filteredUsers.length : data?.total || 0;
+  }, [filteredUsers, data]);
 
   useEffect(() => {
     if (data) {
       dispatch(iniActions.setUsersAll(data.users));
       dispatch(iniActions.setFilteredUsers(data.users));
-      if (!filteredUsers) {
-        total = data?.total || 0;
-      }
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (filteredUsers) {
-      total = filteredUsers?.length || 0;
-    }
-  }, [filteredUsers]);
+  }, [data, dispatch]);
 
   const { lastElementRef } = useInfiniteScroll(
     isFetching,

@@ -2,7 +2,6 @@ import { FC } from "react";
 import { UserCard } from "@/components/Cards/UserCard/UserCard.tsx";
 import { useUsersPage } from "./useUsersPage";
 import styles from "./index.module.css";
-import { useLocation } from "react-router-dom";
 import UniversalFilter from "@/components/All/FilterInput/FilterInput.tsx";
 import { IUser } from "@/common/interfaces/users.interfaces.ts";
 import DialogModal from "@/common/HOC/DialogModal/DialogModal.tsx";
@@ -12,7 +11,6 @@ import { PaginationComponent } from "@/components/All/PaginationComponent/Pagina
 
 export const UsersPage: FC = () => {
   const { users, lastElementRef, total } = useUsersPage();
-  const location = useLocation();
   const dispatch = useAppDispatch();
   const cb = (items: IUser[]) => dispatch(iniActions.setFilteredUsers(items));
 
@@ -42,12 +40,17 @@ export const UsersPage: FC = () => {
           </DialogModal>
         </div>
 
-        {users.length > 0 &&
-          users.map((item, index) => (
-            <div key={item.id} ref={index === users.length - 1 ? lastElementRef : null}>
-              <UserCard item={item} />
-            </div>
-          ))}
+        <div className={styles.absoluteContainer}>
+          {users &&
+            users.map((item, index) => (
+              <div
+                key={item.id}
+                ref={index === users.length - 1 ? lastElementRef : null}
+              >
+                <UserCard item={item} />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

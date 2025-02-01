@@ -24,7 +24,7 @@ export const RecipesPage: FC<IProps> = () => {
         <DialogModal label={"Filters"}>
           <UniversalFilter<IRecipe>
             queryKey={["recipes", location.pathname, location.search]}
-            filterKeys={["name", "tags"]}
+            filterKeys={["name", "tags", "userId"]}
             cb={cb}
             targetArrayKey="recipes"
           />
