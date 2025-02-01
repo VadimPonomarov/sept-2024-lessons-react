@@ -10,8 +10,8 @@ import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 export const useUsersPage = () => {
   const [params, setParams] = useSearchParams();
-  const skip = Number(params.get("skip") || "0");
-  const limit = Number(params.get("limit") || "30");
+  let skip = Number(params.get("skip") || "0");
+  let limit = Number(params.get("limit") || "30");
   const dispatch = useAppDispatch();
   const { filteredUsers } = useAppSelector(state => state.ini);
   const { isFetching, isSuccess, data } = useFetch<IUsersResponse>({
@@ -34,7 +34,7 @@ export const useUsersPage = () => {
 
   useEffect(() => {
     if (filteredUsers) {
-      total = filteredUsers?.length.toString() || 0;
+      total = filteredUsers?.length || 0;
     }
   }, [filteredUsers]);
 

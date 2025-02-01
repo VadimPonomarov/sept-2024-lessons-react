@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import useApRecipes from "@/api/useApRecipes.ts";
+import useApiRecipes from "@/api/useApiRecipes.ts";
 import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
 import { useInfiniteScroll } from "@/pages/UsersCartPage/use-infinite-scroll.ts";
 import { IRecipeResponse } from "@/common/interfaces/recipe.interfaces.ts";
+import { useAppSelector } from "@/common/hooks/store/useApp.ts";
 
 export const useRecipePage = () => {
   const [params, setParams] = useSearchParams();
+  const { filteredRecipes } = useAppSelector(state => state.ini);
   const skip = Number(params.get("skip") || "0");
   const limit = Number(params.get("limit") || "30");
 
-  const { apiRecipesService: apiRecipes } = useApRecipes();
+  const { apiRecipesService: apiRecipes } = useApiRecipes();
   const { isFetching, data, isSuccess } = useFetch<IRecipeResponse>({
     cb: apiRecipes.recipes,
     queryKey: "recipes",
@@ -48,7 +50,8 @@ export const useRecipePage = () => {
     params,
     isFetching,
     isSuccess,
-    data,
+    data: filteredRecipes || data?.recipes,
     lastElementRef,
+    total: filteredRecipes?.length || data?.total,
   };
 };

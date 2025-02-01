@@ -1,8 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-
-interface IProps {
-  total: number;
-}
+import { IProps } from "./interfaces";
 
 export const usePaginationComponent = ({ total }: IProps) => {
   const [params, setParams] = useSearchParams();

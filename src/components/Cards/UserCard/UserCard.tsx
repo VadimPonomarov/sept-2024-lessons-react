@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 
@@ -20,13 +19,9 @@ import { IProps } from "./interfaces";
 
 export const UserCard: FC<IProps> = ({ item }) => {
   const navigate = useNavigate();
-  const isXs = useMediaQuery({ maxWidth: 768 });
   const dispatch = useAppDispatch();
   const handleClick = () => {
-    if (isXs) {
-      return;
-    }
-    navigate("/users/" + item.id);
+    navigate(`/users/${item.id}`, { state: { user: item } });
   };
   const handleClickToAuth = () => {
     dispatch(iniActions.setCurrentUserById(item.id));

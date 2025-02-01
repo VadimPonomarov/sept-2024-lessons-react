@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { IProps, IResponse } from "./index.interfaces";
 import { useAppDispatch } from "@/common/hooks/store/useApp.ts";
-import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 import { IUser } from "@/common/interfaces/users.interfaces.ts";
 
-const useUniversalFilter = <T>({ queryKey, filterKeys, targetArrayKey }: IProps<T>) => {
+const useUniversalFilter = <T>({
+  queryKey,
+  filterKeys,
+  targetArrayKey,
+  cb,
+}: IProps<T>) => {
   const [inputValues, setInputValues] = useState<{ [key in keyof T]?: string }>({});
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
@@ -20,7 +24,7 @@ const useUniversalFilter = <T>({ queryKey, filterKeys, targetArrayKey }: IProps<
             new RegExp(inputValues[key] || "", "i").test(String(user[key as keyof T])),
           ),
       );
-      dispatch(iniActions.setFilteredUsers(filtered as IUser[]));
+      cb(filtered as IUser[]);
     }
   }, [inputValues, queryClient, dispatch]);
 

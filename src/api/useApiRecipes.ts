@@ -6,7 +6,7 @@ import {
   IRecipeSearch,
 } from "@/common/interfaces/recipe.interfaces.ts";
 
-const useApRecipes = () => {
+const useApiRecipes = () => {
   const [apiRecipes] = useInterceptors(getAxios(baseUrl));
 
   const apiRecipesService = {
@@ -25,4 +25,4 @@ const useApRecipes = () => {
   return { apiRecipesService };
 };
 
-export default useApRecipes;
+export default useApiRecipes;

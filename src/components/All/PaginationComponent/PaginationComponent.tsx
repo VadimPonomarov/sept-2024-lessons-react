@@ -20,10 +20,7 @@ import {
 
 import styles from "./index.module.css";
 import { usePaginationComponent } from "./usePaginationComponent";
-
-interface IProps {
-  total?: number;
-}
+import { IProps } from "./interfaces";
 
 export const PaginationComponent: FC<IProps> = ({ total }) => {
   const { setNext, setPrev, currentPage, hasNextPage, hasPrevPage } =
