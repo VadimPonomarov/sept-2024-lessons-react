@@ -1,5 +1,5 @@
 .card {
-    @apply h-[200px] w-[300px] overflow-auto;
+    @apply h-[150px] w-[300px] overflow-auto;
 }
 
 .textSmall {
