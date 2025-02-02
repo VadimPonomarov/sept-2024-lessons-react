@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
-
 import { Input } from "@/components/ui/input.tsx";
 
 const SearchParamLimitSelector = () => {
@@ -34,6 +33,25 @@ const SearchParamLimitSelector = () => {
     handleLimitChange(debouncedValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
+
+  useEffect(() => {
+    const handleParamsChange = () => {
+      const limit = params.get("limit") || "30";
+      setInputValue(limit);
+    };
+
+    handleParamsChange();
+    window.addEventListener("popstate", handleParamsChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleParamsChange);
+    };
+  }, [params]);
+
+  useEffect(() => {
+    const limit = params.get("limit") || "30";
+    setInputValue(limit);
+  }, [params]);
 
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     event.target.select();
