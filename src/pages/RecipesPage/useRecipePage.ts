@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import useApiRecipes from "@/api/useApiRecipes.ts";
 import { useFetch } from "@/common/hooks/use-fetch/useFetch.tsx";
 import { useInfiniteScroll } from "@/pages/UsersCartPage/use-infinite-scroll.ts";
 import { IRecipeResponse } from "@/common/interfaces/recipe.interfaces.ts";
-import { useAppSelector } from "@/common/hooks/store/useApp.ts";
+import { useAppDispatch, useAppSelector } from "@/common/hooks/store/useApp.ts";
+import { iniActions } from "@/store/slises/Ini/iniSlice.ts";
 
 export const useRecipePage = () => {
   const [params, setParams] = useSearchParams();
+  const dispatch = useAppDispatch();
   const { filteredRecipes } = useAppSelector(state => state.ini);
   const skip = Number(params.get("skip") || "0");
   const limit = Number(params.get("limit") || "30");
@@ -18,6 +20,20 @@ export const useRecipePage = () => {
     cb: apiRecipes.recipes,
     queryKey: "recipes",
   });
+
+  const recipes = useMemo(() => {
+    return filteredRecipes.length > 0 ? filteredRecipes : data?.recipes || [];
+  }, [filteredRecipes, data]);
+
+  const total = useMemo(() => {
+    return data?.total || 0;
+  }, [filteredRecipes, data]);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(iniActions.setFilteredRecipes(data.recipes));
+    }
+  }, [data, dispatch]);
 
   const { lastElementRef } = useInfiniteScroll(
     isFetching,
@@ -50,8 +66,8 @@ export const useRecipePage = () => {
     params,
     isFetching,
     isSuccess,
-    data: filteredRecipes || data?.recipes,
+    recipes,
     lastElementRef,
-    total: filteredRecipes?.length || data?.total,
+    total,
   };
 };

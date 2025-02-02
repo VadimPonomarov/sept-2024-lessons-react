@@ -12,7 +12,7 @@ import { PaginationComponent } from "@/components/All/PaginationComponent/Pagina
 type IProps = object;
 
 export const RecipesPage: FC<IProps> = () => {
-  const { data: recipes, lastElementRef, total } = useRecipePage();
+  const { recipes, lastElementRef, total } = useRecipePage();
   const dispatch = useAppDispatch();
   const cb = (items: IRecipe[]) => dispatch(iniActions.setFilteredRecipes(items));
   return (

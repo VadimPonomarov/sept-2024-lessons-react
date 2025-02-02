@@ -47,7 +47,12 @@ export const UserCard: FC<IProps> = ({ item }) => {
           <p>{item.phone}</p>
         </CardContent>
         <CardFooter>
-          <p className={"text-small"}>{item.email}</p>
+          <small className={"text-small"}>Username: {item.username}</small>
+        </CardFooter>
+        <CardFooter>
+          <i>
+            <p className={"text-small"}>{item.email}</p>
+          </i>
         </CardFooter>
       </Card>
     </div>
