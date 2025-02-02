@@ -48,6 +48,11 @@ const SearchParamSkipSelector = () => {
     };
   }, [params]);
 
+  useEffect(() => {
+    const skip = params.get("skip") || "0";
+    setInputValue(skip);
+  }, [params]);
+
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     event.target.select();
   };
