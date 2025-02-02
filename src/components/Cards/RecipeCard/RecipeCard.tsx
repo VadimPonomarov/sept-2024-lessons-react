@@ -6,9 +6,15 @@ import styles from "./index.module.css";
 import { IProps } from "./interfaces";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button.tsx";
+import { v4 as uuidv4 } from "uuid";
 
 export const RecipeCard: FC<IProps> = ({ item }) => {
   const navigate = useNavigate();
+
+  const handleOnClickTag = (event: React.MouseEvent, tag: string) => {
+    event.stopPropagation();
+    console.log(tag);
+  };
   return (
     <Card
       className={styles.card}
@@ -25,7 +31,12 @@ export const RecipeCard: FC<IProps> = ({ item }) => {
             {String(item.tags)
               .split(",")
               .map(item => (
-                <Button variant={"outline"} className={"h-auto w-auto p-0"}>
+                <Button
+                  key={uuidv4()}
+                  variant={"outline"}
+                  className={"h-auto w-auto p-0"}
+                  onClick={e => handleOnClickTag(e, item)}
+                >
                   {item}
                 </Button>
               ))}
