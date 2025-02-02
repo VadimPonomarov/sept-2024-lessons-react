@@ -24,7 +24,7 @@ export const useUsersPage = () => {
   }, [filteredUsers, data]);
 
   const total = useMemo(() => {
-    return filteredUsers.length > 0 ? filteredUsers.length : data?.total || 0;
+    return data?.total || 0;
   }, [filteredUsers, data]);
 
   useEffect(() => {
