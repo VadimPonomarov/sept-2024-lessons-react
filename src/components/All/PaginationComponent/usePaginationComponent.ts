@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { IProps } from "./interfaces";
 
 export const usePaginationComponent = ({ total }: IProps) => {
   const [params, setParams] = useSearchParams();
+
+  useEffect(() => {
+    if (!params.get("skip")) {
+      setParams({ skip: "0", limit: params.get("limit") || "30" });
+    }
+  }, [params, setParams]);
 
   const setNext = () => {
     const newSkip = (
