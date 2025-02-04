@@ -20,7 +20,7 @@ export const useUsersPage = () => {
   });
 
   const users = useMemo(() => {
-    return filteredUsers.length > 0 ? filteredUsers : data?.users || [];
+    return filteredUsers || data?.users || [];
   }, [filteredUsers, data]);
 
   const total = useMemo(() => {

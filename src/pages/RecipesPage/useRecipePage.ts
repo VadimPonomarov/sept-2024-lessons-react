@@ -22,7 +22,7 @@ export const useRecipePage = () => {
   });
 
   const recipes = useMemo(() => {
-    return filteredRecipes.length > 0 ? filteredRecipes : data?.recipes || [];
+    return filteredRecipes || data?.recipes || [];
   }, [filteredRecipes, data]);
 
   const total = useMemo(() => {
